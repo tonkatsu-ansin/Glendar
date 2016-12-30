@@ -13,8 +13,11 @@ const Fetch = require("./utilities/Fetch");
 Vue.component("board"               , require("./components/Board.vue"));
 Vue.component("board-component"     , require("./components/BoardComponent.vue"));
 
+// Interfaces
+
 Vue.component("initiative"          , require("./components/Interface/Initiative.vue"))
 Vue.component("chat-panel"          , require("./components/Interface/ChatPanel.vue"));
+Vue.component("charactor-detail"    , require("./components/Interface/CharactorDetail.vue"));
 Vue.component("component-infomation", require("./components/Interface/ComponentInfomation.vue"));
 
 // Pages

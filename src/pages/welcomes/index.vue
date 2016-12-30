@@ -3,8 +3,11 @@
     <board :sizes="getBoardSize"></board>
 
     <chat-panel></chat-panel>
-    <component-infomation></component-infomation>
-    <initiative></initiative>
+
+    <component-infomation v-if="!stores.ApplicationStore.isFullDetail"></component-infomation>
+    <charactor-detail v-else></charactor-detail>
+
+    <initiative v-if="!stores.ApplicationStore.isFullDetail"></initiative>
 	</div>
 </template>
 

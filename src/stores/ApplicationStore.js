@@ -1,3 +1,4 @@
 module.exports = {
-  isDragging: false
+  isDragging: false,
+  isFullDetail: true
 };

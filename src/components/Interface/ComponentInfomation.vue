@@ -6,7 +6,7 @@
 
       <div class="component-about-status" v-if="active.type == 'charactor'">
         <div class="status-name">{{active.name}}</div>
-        <div class="status-params">HP: 10 / 17 MP: 8 / 14</div>
+        <div class="status-params">HP: {{active.status.hp}} / {{active.status.max_hp}} MP: {{active.status.mp}}/ {{active.status.max_mp}} <a href="#" v-on:click.prevent="open">開く</a></div>
       </div>
 
       <div class="component-about-status" v-if="active.type == 'object'">
@@ -32,8 +32,6 @@
   top: 25px;
   right: 25px;
   width: 350px;
-  height: 88px;
-  padding: 1px 0;
   /*height: calc(50% - 50px);*/
 
   background: #fff;
@@ -61,12 +59,14 @@
 
 .status-name{
   font-weight: 600;
+  height: 20px;
 }
 
 .status-params{
   color: #999;
   font-size: 12px;
   margin-top: 5px;
+  height: 25px;
 }
 
 .dragging{
@@ -91,7 +91,9 @@ module.exports = {
     }
   },
   methods: {
-
+    open(){
+      this.stores.ApplicationStore.isFullDetail = true;
+    }
   }
 }
 </script>
