@@ -1,3 +1,5 @@
+const DotenvPlugin = require('webpack-dotenv-plugin');
+
 module.exports = {
   publicPath: './public_html/',
   entry: [
@@ -56,5 +58,11 @@ module.exports = {
     loaders: {
       js: 'babel'
     }
-  }
+  },
+  plugins: [
+    new DotenvPlugin({
+      sample: './.env.sample',
+      path: './.env'
+    })
+  ]
 }
