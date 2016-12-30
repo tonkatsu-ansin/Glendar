@@ -10,6 +10,8 @@
     <charactor-detail v-else></charactor-detail>
 
     <initiative v-if="!stores.ApplicationStore.isFullDetail"></initiative>
+
+		<file-dialog v-if="stores.ApplicationStore.isOpenFileDialog"></file-dialog>
 	</div>
 </template>
 
