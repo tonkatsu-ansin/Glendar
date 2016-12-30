@@ -1,6 +1,10 @@
 <template lang="html">
 	<div class="content">
-    <board :sizes="{x:40,y:40}"></board>
+    <board :sizes="getBoardSize"></board>
+
+    <chat-panel></chat-panel>
+    <component-infomation></component-infomation>
+    <initiative></initiative>
 	</div>
 </template>
 
@@ -22,6 +26,14 @@ module.exports = {
 		return {
 			stores: require("../../stores/Stores.js")
 		};
+	},
+	computed: {
+		getBoardSize(){
+			return {
+				x: this.stores.BoardsStore.boards[0].x,
+				y: this.stores.BoardsStore.boards[0].y
+			}
+		}
 	}
 }
 </script>

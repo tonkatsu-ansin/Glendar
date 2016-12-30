@@ -1,4 +1,6 @@
 module.exports = {
-  ApplicationStore: require("./ApplicationStore"),
-  ComponentsStore: require("./ComponentsStore")
+  BoardsStore      : require("./BoardsStore"),
+  MessagesStore    : require("./MessagesStore"),
+  ComponentsStore  : require("./ComponentsStore"),
+  ApplicationStore : require("./ApplicationStore")
 }

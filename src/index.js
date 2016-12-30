@@ -10,8 +10,12 @@ const Fetch = require("./utilities/Fetch");
 
 // Components
 
-Vue.component("board", require("./components/Board.vue"));
-Vue.component("board-component", require("./components/BoardComponent.vue"));
+Vue.component("board"               , require("./components/Board.vue"));
+Vue.component("board-component"     , require("./components/BoardComponent.vue"));
+
+Vue.component("initiative"          , require("./components/Interface/Initiative.vue"))
+Vue.component("chat-panel"          , require("./components/Interface/ChatPanel.vue"));
+Vue.component("component-infomation", require("./components/Interface/ComponentInfomation.vue"));
 
 // Pages
 

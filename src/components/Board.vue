@@ -1,6 +1,6 @@
 <template lang="html">
-  <div class="map" :style="getMapStyle">
-    <div class="map-body">
+  <div class="map">
+    <div class="map-body" :style="getMapStyle">
       <board-component :component="component" v-for="component in getComponents"></board-component>
     </div>
   </div>
@@ -18,8 +18,7 @@
   background-size: cover;
   background-repeat: no-repeat;
 
-  border-left: solid 1px #000;
-  border-top: solid 1px #000;
+  border: solid 400px #333;
 }
 
 .map-body::before{
@@ -32,17 +31,17 @@
   height: 100%;
 
   background-repeat: repeat;
-  background-size: 50px 50px;
+  background-size: 40px 40px;
   background-image: linear-gradient(
     transparent         0px,
-    transparent        49px,
-    rgba(0, 0, 0, 1.0) 49px
+    transparent        39px,
+    rgba(0, 0, 0, 1.0) 39px
   ),
   linear-gradient(
     90deg,
     transparent        0px,
-    transparent        49px,
-    rgba(0, 0, 0, 1.0) 49px
+    transparent        39px,
+    rgba(0, 0, 0, 1.0) 39px
   );
 }
 </style>
@@ -61,8 +60,8 @@ module.exports = {
     },
     getMapStyle(){
       return {
-        width : `${this.sizes.x * 50}px`,
-        height: `${this.sizes.y * 50}px`,
+        width : `${this.sizes.x * 40}px`,
+        height: `${this.sizes.y * 40}px`,
       }
     }
   },
