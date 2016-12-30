@@ -84,6 +84,7 @@ form button{
 </style>
 
 <script>
+const Fetch = require("../../utilities/Fetch");
 module.exports = {
 	props: ["component"],
   data: ()=>{
@@ -105,7 +106,8 @@ module.exports = {
   methods: {
     send(e){
       const TimeStamp = require("../../utilities/TimeStamp");
-      this.stores.MessagesStore.messages.push(
+      Fetch("",
+        "POST",
         {
           color : "#999",
           user  : this.message.user || "名無し",
