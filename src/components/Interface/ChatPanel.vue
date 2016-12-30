@@ -84,9 +84,15 @@ form button{
 </style>
 
 <script>
+const WSManager = require("../../utilities/WSManager")();
 const Fetch = require("../../utilities/Fetch");
 module.exports = {
 	props: ["component"],
+	beforeRouteEnter(from, to, next){
+		next(vm=>{
+			vm.initialize();
+		});
+	},
   data: ()=>{
     return {
       message: {
@@ -95,6 +101,21 @@ module.exports = {
       },
       stores: require("../../stores/Stores")
     }
+  },
+  created(){
+    const messages = WSManager.database().ref('boards/chat');
+    messages.once("value")
+    .then((data)=>{
+      data = data.val()
+      console.log(data);
+      Object.keys(data).forEach((key)=>{
+        this.stores.MessagesStore.messages.push(data[key]);
+      })
+
+      messages.on("child_added", (data) => {
+        this.stores.MessagesStore.messages.push(data.val())
+      });
+    })
   },
   computed: {
     getActiveComponent(){
@@ -108,12 +129,12 @@ module.exports = {
       const TimeStamp = require("../../utilities/TimeStamp");
       Fetch("",
         "POST",
-        {
+        JSON.stringify({
           color : "#999",
           user  : this.message.user || "名無し",
           text  : this.message.text,
           time  : TimeStamp.makeTime()
-        }
+        })
       );
       this.message.text =  "";
     }
