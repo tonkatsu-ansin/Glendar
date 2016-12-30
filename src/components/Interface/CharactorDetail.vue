@@ -18,7 +18,7 @@
       <h2>Status</h2>
       <dl v-for="(param, name) in active.status" v-if="active.type == 'charactor'">
         <dt>{{name}}</dt>
-        <dd>{{param}}</dd>
+        <dd><input v-model="active.status[name]" v-on:blur.prevent="updateStatus(active.key, name, param)"></dd>
       </dl>
 
       <dl class="">
@@ -107,6 +107,8 @@
 </style>
 
 <script>
+const WSManager = require("../../utilities/WSManager")();
+
 module.exports = {
 	props: ["charactor"],
   data: ()=>{
@@ -124,6 +126,18 @@ module.exports = {
   methods: {
     close(){
       this.stores.ApplicationStore.isFullDetail = false;
+    },
+    updateStatus(key, name, param){
+      console.log(key, name, param);
+      const data = {};
+      data[name] = param;
+
+      WSManager.database().ref(`/boards/components/components/${key}`).update(
+        Object.assign(
+          Object.create(null),
+          data
+        )
+      );
     }
   }
 }

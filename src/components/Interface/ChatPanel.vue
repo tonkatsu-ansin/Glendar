@@ -1,10 +1,11 @@
 <template lang="html">
   <div :class="{ 'chat-panel': true, 'dragging': this.stores.ApplicationStore.isDragging }">
     <ul class="logs">
-      <li v-for="message in stores.MessagesStore.messages" class="log">{{message}}</li>
+      <li v-for="message in stores.MessagesStore.messages" class="log" :style="{color: message.color}">{{message.time}}: {{message.user}} {{message.text}}</li>
     </ul>
     <form v-on:submit.prevent="send">
-      <input v-model="message">
+      <input v-model="message.user" class="user" placeholder="名無し">
+      <input v-model="message.text" class="text" placeholder="body here..." required="">
       <button type="submit" name="button">送信</button>
     </form>
   </div>
@@ -24,6 +25,7 @@
 .logs .log{
   padding: 5px 10px;
   font-size: 12px;
+  font-weight: bold;
 }
 
 .chat-panel{
@@ -49,16 +51,24 @@ form{
   height: 50px;
   display: flex;
   align-items: center;
-  justify-content: flex-start;
+  justify-content: space-between;
   padding: 0 10px;
 }
 
-form input{
-  width: calc(100% - 100px);
+form .user{
+  width: 100px;
   height: 24px;
   outline: none;
 
-  font-size: 14px;
+  font-size: 12px;
+}
+
+form .text{
+  width: calc(100% - 220px);
+  height: 24px;
+  outline: none;
+
+  font-size: 12px;
 }
 
 form button{
@@ -78,7 +88,10 @@ module.exports = {
 	props: ["component"],
   data: ()=>{
     return {
-      message: "",
+      message: {
+        user: "",
+        text: ""
+      },
       stores: require("../../stores/Stores")
     }
   },
@@ -93,9 +106,14 @@ module.exports = {
     send(e){
       const TimeStamp = require("../../utilities/TimeStamp");
       this.stores.MessagesStore.messages.push(
-        `${TimeStamp.makeTime()} ${this.message}`
+        {
+          color : "#999",
+          user  : this.message.user || "名無し",
+          text  : this.message.text,
+          time  : TimeStamp.makeTime()
+        }
       );
-      this.message = "";
+      this.message.text =  "";
     }
   }
 }
