@@ -24,11 +24,17 @@
 </style>
 
 <script>
+const WSManager = require("../../utilities/WSManager")();
 module.exports = {
 	data: () => {
 		return {
 			stores: require("../../stores/Stores.js")
 		};
+	},
+	beforeRouteEnter(from, to, next){
+		next(vm=>{
+			vm.initialize();
+		});
 	},
 	computed: {
 		getBoardSize(){
@@ -36,6 +42,52 @@ module.exports = {
 				x: this.stores.BoardsStore.boards[0].x,
 				y: this.stores.BoardsStore.boards[0].y
 			}
+		}
+	},
+	methods: {
+		initialize(){
+      const components = WSManager.database().ref('boards/components/components');
+      components.once("value")
+      .then((data)=>{
+        console.log(data.val());
+        data.val().map((component, key)=>{
+          this.stores.ComponentsStore.components.push(
+            Object.assign(
+              Object.create(null),
+              component,
+              {
+                key
+              }
+            )
+          );
+        })
+
+        components.on("child_added", (data) => {
+          console.log("Add")
+          this.stores.ComponentsStore.components.push(
+            Object.assign(
+              Object.create(null),
+              data.val(),
+              {
+                key: data.key
+              }
+            )
+          );
+        });
+
+        components.on('child_changed', (data) => {
+          console.log("get", data.val());
+          const target = data.val();
+          this.stores.ComponentsStore.components = this.stores.ComponentsStore.components.map((component)=>{
+            if(component.id == target.id){
+              component = target;
+              console.log("Search done");
+            }
+            return component;
+          })
+          console.log(this.stores.ComponentsStore.components);
+        });
+      })
 		}
 	}
 }

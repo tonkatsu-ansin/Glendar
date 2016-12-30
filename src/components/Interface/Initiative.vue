@@ -15,13 +15,13 @@
 
       <li v-for="charactor in getCharactors">
         <ul class="initiative-component initiative-column">
-          <li>{{charactor.status.name}}</li>
+          <li>{{charactor.name}}</li>
           <li>{{charactor.status.hp}} / {{charactor.status.max_hp}}</li>
           <li>{{charactor.status.mp}} / {{charactor.status.max_mp}}</li>
           <li>{{charactor.status.move}}</li>
           <li>{{charactor.status.protection}}</li>
           <li><input type="checkbox" name="" value=""></li>
-          <li>{{charactor.status.memo}}</li>
+          <li>{{charactor.memo}}</li>
         </ul>
       </li>
     </ul>

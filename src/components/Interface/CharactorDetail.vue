@@ -14,9 +14,9 @@
       </div>
     </div>
 
-    <div class="charactor-status" v-if="active && active.type == 'charactor'">
+    <div class="charactor-status" v-if="active">
       <h2>Status</h2>
-      <dl v-for="(param, name) in active.status">
+      <dl v-for="(param, name) in active.status" v-if="active.type == 'charactor'">
         <dt>{{name}}</dt>
         <dd>{{param}}</dd>
       </dl>

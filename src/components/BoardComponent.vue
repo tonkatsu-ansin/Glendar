@@ -29,6 +29,7 @@ img{
 </style>
 
 <script>
+const WSManager = require("../utilities/WSManager")();
 const gridsize = 40;
 
 module.exports = {
@@ -55,20 +56,26 @@ module.exports = {
       this.stores.ApplicationStore.isDragging = true;
     },
     dragend(e){
-      console.log(e);
-      this.component.x = Math.max(
-        0,
-        Math.min(
-          Math.floor( (e.pageX - 390) / gridsize),
-          this.stores.BoardsStore.boards[0].x-1
+      console.log(
+        Object.assign(
+          Object.create(null),
+          this.component,
+          {
+            x: Math.max( Math.min( Math.floor( (e.pageX - 390) / gridsize), this.stores.BoardsStore.boards[0].x), 0),
+            y: Math.max( Math.min( Math.floor( (e.pageY - 400) / gridsize), this.stores.BoardsStore.boards[0].y), 0),
+          }
         )
       );
+      console.log(`/boards/components/components/${this.component.key}`);
 
-      this.component.y = Math.max(
-        0,
-        Math.min(
-          Math.floor( (e.pageY - 400) / gridsize),
-          this.stores.BoardsStore.boards[0].y-1
+      WSManager.database().ref(`/boards/components/components/${this.component.key}`).update(
+        Object.assign(
+          Object.create(null),
+          this.component,
+          {
+            x: Math.max( Math.min( Math.floor( (e.pageX - 390) / gridsize), this.stores.BoardsStore.boards[0].x), 0),
+            y: Math.max( Math.min( Math.floor( (e.pageY - 400) / gridsize), this.stores.BoardsStore.boards[0].y), 0),
+          }
         )
       );
 
