@@ -1,5 +1,8 @@
 module.exports = {
   activeId: undefined,
+  active: {
+
+  },
   components: [
     // {
     //   id         : 1,

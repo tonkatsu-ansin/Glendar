@@ -118,9 +118,7 @@ module.exports = {
   },
   computed: {
     active(){
-      return this.stores.ComponentsStore.components.find((charactor)=>{
-        return this.stores.ComponentsStore.activeId == charactor.id;
-      }) || false;
+      return this.stores.ComponentsStore.active;
     }
   },
   methods: {
@@ -134,7 +132,7 @@ module.exports = {
 
       WSManager.database().ref(`/boards/components/components/${key}`).update(
         Object.assign(
-          Object.create(null),
+          this.stores.ComponentsStore.active,
           data
         )
       );

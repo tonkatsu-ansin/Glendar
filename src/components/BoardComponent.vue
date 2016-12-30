@@ -50,6 +50,7 @@ module.exports = {
     mouseover(e){
       console.log(e);
       this.stores.ComponentsStore.activeId = this.component.id;
+      this.stores.ComponentsStore.active = this.component;
       console.log(this.stores.ComponentsStore.activeId);
     },
     dragstart(e){

@@ -84,7 +84,12 @@ module.exports = {
               console.log("Search done");
             }
             return component;
-          })
+          });
+
+          if(this.stores.ComponentsStore.active.id == target.id){
+            this.stores.ComponentsStore.active = target;
+          };
+
           console.log(this.stores.ComponentsStore.components);
         });
       })
