@@ -1,6 +1,8 @@
 <template lang="html">
   <div :class="{ 'music-player': true, 'dragging': this.stores.ApplicationStore.isDragging }">
     <span class="note">♪</span> <span class="name">サリアの歌</span>
+    <input type="range" class="volume" v-model="volume">
+    <audio autoplay></audio>
   </div>
 </template>
 
@@ -36,6 +38,15 @@
   margin-left: 10px;
 }
 
+.volume{
+  position: absolute;
+  right: -7px;
+  top: 18px;
+  width: 40px;
+  transform: rotate(-90deg);
+  outline: none;
+}
+
 .dragging{
   pointer-events: none;
   opacity: 0.2;
@@ -58,7 +69,13 @@ module.exports = {
   data: ()=>{
     return {
       stores: require("../../stores/Stores"),
-      name: "God"
+      name: "God",
+      volume: 100
+    }
+  },
+  watch: {
+    "volume": function(e){
+      this.$el.querySelector("audio").volume = this.volume * 0.01;
     }
   },
   computed: {
