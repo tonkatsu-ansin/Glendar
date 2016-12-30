@@ -9,7 +9,7 @@
     "lint:fix": "eslint ./src --fix --ext=js,vue",
     "lint:safe": "eslint ./src --ext=js,vue ;exit 0",
     "build": "webpack --progress --hide-modules --config webpack.config.js",
-    "serve": "webpack-dev-server --inline --hot --config webpack.config.js -d --open --history-api-fallback",
+    "serve": "webpack-dev-server --inline --hot --config webpack.config.js -d --open --history-api-fallback --host 0.0.0.0",
     "deploy": "npm run build;gulp deploy",
     "test": "npm run lint",
     "test:safe": "npm run lint; exit 0"

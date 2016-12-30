@@ -56,6 +56,8 @@
   text-align: center;
   padding: 10px 0;
   width: 80px;
+  height: 15px;
+  overflow: auto;
 }
 
 .component-infomation{
@@ -90,11 +92,6 @@ module.exports = {
     getCharactors(){
       return this.stores.ComponentsStore.components.filter((component)=>{
         return component.type == "charactor";
-      })
-    },
-    getActiveComponent(){
-      return this.stores.ComponentsStore.components.find((component)=>{
-        return this.stores.ComponentsStore.activeId == component.id;
       })
     }
   },

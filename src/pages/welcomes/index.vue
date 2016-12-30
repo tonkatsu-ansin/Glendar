@@ -4,6 +4,8 @@
 
     <chat-panel></chat-panel>
 
+    <music-player></music-player>
+
     <component-infomation v-if="!stores.ApplicationStore.isFullDetail"></component-infomation>
     <charactor-detail v-else></charactor-detail>
 
@@ -63,16 +65,20 @@ module.exports = {
         })
 
         components.on("child_added", (data) => {
-          console.log("Add")
-          this.stores.ComponentsStore.components.push(
-            Object.assign(
-              Object.create(null),
-              data.val(),
-              {
-                key: data.key
-              }
-            )
-          );
+          if(!this.stores.ComponentsStore.components.find((component)=>{
+            return data.val().id == component.id;
+          })){
+            console.log("Add")
+            this.stores.ComponentsStore.components.push(
+              Object.assign(
+                Object.create(null),
+                data.val(),
+                {
+                  key: data.key
+                }
+              )
+            );
+          }
         });
 
         components.on('child_changed', (data) => {
