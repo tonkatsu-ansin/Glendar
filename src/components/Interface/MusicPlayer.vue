@@ -1,8 +1,8 @@
 <template lang="html">
-  <div :class="{ 'music-player': true, 'dragging': this.stores.ApplicationStore.isDragging }">
+  <div :class="getMusicPlayerState">
     <span class="note">♪</span> <span class="name">サリアの歌</span>
     <input type="range" class="volume" v-model="volume">
-    <audio autoplay></audio>
+    <audio src="/test.mp3" autoplay></audio>
   </div>
 </template>
 
@@ -24,7 +24,18 @@
   justify-content: flex-start;
   padding-left: 10px;
 
+  transition: left 0.4s ease-out;
+}
+
+.music-player.first{
+  transition: all 0.0s;
+
   animation: musicanim 5s ease-in-out 1;
+}
+
+.music-player:hover{
+  left: 0px;
+  transition: left 0.4s ease-out;
 }
 
 .note{
@@ -45,6 +56,7 @@
   width: 40px;
   transform: rotate(-90deg);
   outline: none;
+  cursor: pointer;
 }
 
 .dragging{
@@ -70,7 +82,8 @@ module.exports = {
     return {
       stores: require("../../stores/Stores"),
       name: "God",
-      volume: 100
+      volume: 100,
+      isFirst: true
     }
   },
   watch: {
@@ -78,11 +91,24 @@ module.exports = {
       this.$el.querySelector("audio").volume = this.volume * 0.01;
     }
   },
+  created(){
+    console.log(this);
+    setTimeout(()=>{
+      this.isFirst = false;
+    }, 5000);
+  },
   computed: {
     getCharactors(){
       return this.stores.ComponentsStore.components.filter((component)=>{
         return component.type == "charactor";
       })
+    },
+    getMusicPlayerState(){
+      return {
+        'music-player': true,
+        'first': this.isFirst,
+        'dragging': this.stores.ApplicationStore.isDragging
+      }
     }
   },
 }
