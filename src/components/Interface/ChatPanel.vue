@@ -53,9 +53,7 @@ form input {
   height: 28px;
   outline: none;
 }
-form .picker {
-  width: 80px;
-}
+
 form .user{
   width: 100px;
   outline: none;
@@ -63,16 +61,27 @@ form .user{
   font-size: 12px;
 }
 
-form .color{
-  width: 300px;
-  outline: none;
-  font-size: 12px;
-}
 form .text{
-  width: calc(100% - 20px);
+  flex: 1;
   outline: none;
 
   font-size: 12px;
+}
+
+form .color{
+  width: 80px;
+  outline: none;
+  font-size: 12px;
+  margin-right: 0;
+  border: solid 1px #AFAFAF;
+  border-right: none;
+  height: 30px;
+}
+
+form .picker{
+  width: 50px;
+  height: 32px;
+  margin-left: 0;
 }
 
 form button{
@@ -80,8 +89,8 @@ form button{
   background: #00aaee;
   border: none;
   color: #fff;
-  width: 80px;
-  height: 28px;
+  width: 100px;
+  height: 34px;
   font-size: 16px;
   margin-left: 10px;
 }
