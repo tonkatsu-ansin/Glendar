@@ -62,11 +62,6 @@
   font-size: 12px;
 }
 
-.dragging{
-  pointer-events: none;
-  opacity: 0.2;
-}
-
 .charactor-status{
   margin: 10px;
 }

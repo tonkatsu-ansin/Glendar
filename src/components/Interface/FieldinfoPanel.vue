@@ -45,11 +45,6 @@
   font-family: "Hiragino Sans";
 }
 
-.dragging{
-  pointer-events: none;
-  opacity: 0.2;
-}
-
 form{
   background: #f5f5f5;
   width: calc(100% - 20px);

@@ -36,11 +36,6 @@
   background: #555;
 }
 
-.dragging{
-  pointer-events: none;
-  opacity: 0.2;
-}
-
 form{
   width: calc(100% - 20px);
   height: 40px;
