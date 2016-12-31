@@ -7,7 +7,7 @@
       <input v-model="message.user" class="user" placeholder="名無し" required>
       <input v-model="message.text" class="text" placeholder="body here..." required>
       <input v-model="message.color" class="color" required>
-      <input v-model="message.color"  type="color" required>
+      <input v-model="message.color" class="picker" type="color" required>
       <button type="submit" name="button">送信</button>
     </form>
   </div>
@@ -57,24 +57,29 @@ form{
   padding: 0 10px;
 }
 
+form input {
+  margin-left: 5px;
+  margin-right: 5px;
+  height: 28px;
+  outline: none;
+}
+form .picker {
+  width: 80px;
+}
 form .user{
   width: 100px;
-  height: 24px;
   outline: none;
 
   font-size: 12px;
 }
 
 form .color{
-  width: calc(100% - 540px);
-  height: 24px;
+  width: 300px;
   outline: none;
-
   font-size: 12px;
 }
 form .text{
-  width: calc(100% - 220px);
-  height: 24px;
+  width: calc(100% - 20px);
   outline: none;
 
   font-size: 12px;
