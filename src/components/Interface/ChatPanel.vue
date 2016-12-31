@@ -94,19 +94,22 @@ module.exports = {
   },
   created(){
     const messages = WSManager.database().ref('boards/chat');
-    messages.once("value")
-    .then((data)=>{
-      data = data.val()
-      console.log(data);
-      Object.keys(data).forEach((key)=>{
-        this.stores.MessagesStore.messages.push(data[key]);
-      })
 
-      messages.on("child_added", (data) => {
-        this.stores.MessagesStore.messages.push(data.val())
+    messages.on("child_added", (data) => {
+      this.stores.MessagesStore.messages.push(data.val());
+      setTimeout(()=>{
         this.goBottom();
-      });
-    })
+      }, 32);
+    });
+
+    // messages.once("value")
+    // .then((data)=>{
+    //   data = data.val()
+    //   console.log(data);
+    //   Object.keys(data).forEach((key)=>{
+    //     this.stores.MessagesStore.messages.push(data[key]);
+    //   })
+    // })
   },
   computed: {
     getActiveComponent(){
