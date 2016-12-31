@@ -1,29 +1,11 @@
 <template lang="html">
-  <div :class="{ 'charactor-detail': true, 'dragging': this.stores.ApplicationStore.isDragging }" :style="{ 'height': active ? 'calc(100% - 50px)' : 'auto'}">
-    <div class="charactor-about" v-if="active">
-      <img :src="active.image" alt="" class="charactor-about-image">
-
-      <div class="charactor-about-status" v-if="active.type == 'charactor'">
-        <div class="status-name">{{active.name}}</div>
-        <div class="status-params">HP: {{active.status.hp}} / {{active.status.max_hp}} MP: {{active.status.mp}}/ {{active.status.max_mp}} <a href="#" v-on:click.prevent="close">閉じる</a></div>
-      </div>
-
-      <div class="charactor-about-status" v-if="active.type == 'object'">
-        <div class="status-name">{{active.name}}</div>
-        <div class="status-params">{{active.memo}}</div>
-      </div>
-    </div>
+  <div :class="{ 'charactor-detail': true, 'dragging': this.stores.ApplicationStore.isDragging }">
+    <charactor-about :charactor="active" v-if="active"></charactor-about>
 
     <div class="charactor-status" v-if="active">
-      <h2>Status</h2>
       <dl v-for="(param, name) in active.status" v-if="active.type == 'charactor'">
         <dt>{{name}}</dt>
         <dd><input v-model="active.status[name]" v-on:blur.prevent="updateStatus(active.key, name, param)"></dd>
-      </dl>
-
-      <dl class="">
-        <dt>その他メモ</dt>
-        <dd>{{active.memo}}</dd>
       </dl>
     </div>
 
@@ -39,17 +21,15 @@
 
 <style scoped>
 .charactor-detail{
-  position: fixed;
-  top: 25px;
-  right: 25px;
-  width: 350px;
-  /*height: calc(50% - 50px);*/
+  width: 300px;
+  height: 350px;
 
   color: #333;
 
   background: #fff;
 
-  box-shadow: 0 3px 6px rgba(0,0,0,0.1);
+
+  overflow: auto;
 }
 
 .charactor-about{
@@ -59,27 +39,27 @@
 }
 
 .charactor-about-image{
-  width: 60px;
-  height: 60px;
-  border-radius: 2px;
+  width: 40px;
+  height: 40px;
   background: #f0f0f0;
+  margin-right: 10px;
 }
 
 .charactor-about-status{
-  margin: 10px;
-  display: block;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
 }
 
 .status-name{
+  font-size: 14px;
   font-weight: 600;
-  height: 20px;
 }
 
 .status-params{
   color: #999;
   font-size: 12px;
-  margin-top: 5px;
-  height: 25px;
 }
 
 .dragging{
@@ -126,17 +106,19 @@ module.exports = {
       this.stores.ApplicationStore.isFullDetail = false;
     },
     updateStatus(key, name, param){
-      console.log(key, name, param);
-      const data = {
-        status: {}
-      };
+      const rawData = this.stores.ComponentsStore.active;
+      const data = {status: {}};
       data.status[name] = param;
 
+      const sendData = this.stores.ComponentsStore.active;
+      sendData.status = Object.assign(
+        Object.create(null),
+        this.stores.ComponentsStore.active.status,
+        data.status
+      );
+
       WSManager.database().ref(`/boards/components/components/${key}`).update(
-        Object.assign(
-          this.stores.ComponentsStore.active,
-          data
-        )
+        sendData
       );
     }
   }

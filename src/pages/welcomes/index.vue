@@ -1,18 +1,24 @@
 <template lang="html">
 	<div class="content">
-    <board :sizes="getBoardSize"></board>
+		<div class="left-content">
+			<board :sizes="getBoardSize"></board>
 
-    <chat-panel></chat-panel>
+			<div class="bottom-bar">
+	    	<chat-panel></chat-panel>
+  	    <fieldinfo-panel></fieldinfo-panel>
+				<!-- <music-player></music-player>
+		    <file-select></file-select> -->
+			</div>
+		</div>
 
-    <music-player></music-player>
-    <file-select></file-select>
+		<div class="right-bar">
+	    <charactor-detail></charactor-detail>
 
-    <component-infomation v-if="!stores.ApplicationStore.isFullDetail"></component-infomation>
-    <charactor-detail v-else></charactor-detail>
+	    <initiative></initiative>
+      <boardselect-panel></boardselect-panel>
+		</div>
 
-    <initiative v-if="!stores.ApplicationStore.isFullDetail"></initiative>
-
-		<file-dialog v-if="stores.ApplicationStore.isOpenFileDialog"></file-dialog>
+    <file-dialog v-if="stores.ApplicationStore.isOpenFileDialog"></file-dialog>
 	</div>
 </template>
 
@@ -22,9 +28,25 @@
   height: 100%;
 
 	display: flex;
-	flex-direction: column;
+	/*flex-direction: column;*/
 	align-items: flex-start;
 	justify-content: flex-start;
+}
+
+.left-content{
+	width: calc(100% - 300px);
+  height: 100%;
+}
+
+.bottom-bar{
+  width: 100%;
+  height: 180px;
+  display: flex;
+}
+
+.right-bar{
+  width: 350px;
+  height: 100%;
 }
 </style>
 

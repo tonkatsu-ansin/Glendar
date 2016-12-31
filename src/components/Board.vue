@@ -8,6 +8,12 @@
 
 <style scoped>
 
+.map{
+  width: 100%;
+  height: calc(100% - 180px);
+  overflow: auto;
+}
+
 .map-body{
   position: relative;
 
@@ -18,7 +24,7 @@
   background-size: cover;
   background-repeat: no-repeat;
 
-  border: solid 400px #333;
+  /*border: solid 400px #333;*/
 }
 
 .map-body::before{
