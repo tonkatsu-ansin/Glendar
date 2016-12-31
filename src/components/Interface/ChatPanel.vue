@@ -4,8 +4,8 @@
       <li v-for="message in stores.MessagesStore.messages" class="log" :style="{color: message.color}">{{message.time}}: {{message.user}} {{message.text}}</li>
     </ul>
     <form v-on:submit.prevent="send">
-      <input v-model="message.user" class="user" placeholder="名無し">
-      <input v-model="message.text" class="text" placeholder="body here..." required="">
+      <input v-model="message.user" class="user" placeholder="名無し" required>
+      <input v-model="message.text" class="text" placeholder="body here..." required>
       <button type="submit" name="button">送信</button>
     </form>
   </div>
