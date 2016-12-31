@@ -59,6 +59,7 @@ form .user{
   outline: none;
 
   font-size: 12px;
+  margin-left: 0;
 }
 
 form .text{
