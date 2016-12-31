@@ -15,5 +15,7 @@
 	justify-content: center;
 
   background: #f0f0f0;
+
+	-webkit-font-smoothing: antialiased;
 }
 </style>
