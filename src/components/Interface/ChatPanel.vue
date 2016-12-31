@@ -114,6 +114,7 @@ module.exports = {
 
       messages.on("child_added", (data) => {
         this.stores.MessagesStore.messages.push(data.val())
+        this.goBottom();
       });
     })
   },
@@ -125,6 +126,11 @@ module.exports = {
     }
   },
   methods: {
+    goBottom(){
+      let obj = this.$el.querySelector(".logs");
+      console.log(obj.scrollHeight);
+      obj.scrollTop = obj.scrollHeight;
+    },
     send(e){
       const TimeStamp = require("../../utilities/TimeStamp");
       Fetch("",
