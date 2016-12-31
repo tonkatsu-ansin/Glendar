@@ -127,8 +127,10 @@ module.exports = {
     },
     updateStatus(key, name, param){
       console.log(key, name, param);
-      const data = {};
-      data[name] = param;
+      const data = {
+        status: {}
+      };
+      data.status[name] = param;
 
       WSManager.database().ref(`/boards/components/components/${key}`).update(
         Object.assign(

@@ -5,6 +5,7 @@
     <chat-panel></chat-panel>
 
     <music-player></music-player>
+    <file-select></file-select>
 
     <component-infomation v-if="!stores.ApplicationStore.isFullDetail"></component-infomation>
     <charactor-detail v-else></charactor-detail>

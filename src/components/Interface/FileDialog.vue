@@ -1,11 +1,21 @@
 <template lang="html">
   <div class="file-dialog">
-    <div class="dialog-overlay"></div>
+    <div class="dialog-overlay" v-on:click="dismiss"></div>
     <div class="dialog-body">
       <ul class="file-list">
+        <li class="list-element" v-on:click="selectFile(number)">
+          <div class="list-filetype">
+            <span>+</span>
+          </div>
+
+          <div class="list-info">
+            <span class="list-filename">ファイルをアップロード</span>
+          </div>
+        </li>
+
         <li v-for="number in 10" :class="{'list-element': true, 'active': number == active}" v-on:click="selectFile(number)">
           <div class="list-filetype">
-            ♪
+            <span>♪</span>
           </div>
 
           <div class="list-info">
@@ -52,10 +62,11 @@
 
 .dialog-body{
   position: fixed;
-  left: calc(50% - 200px);
-  top: 50px;
-  width: 400px;
-  height: calc(100% - 100px);
+  left: calc(50% - 225px);
+  top: 0;
+  bottom: 0;
+  width: 450px;
+  height: 400px;
 
   font-family: "Hiragino Mincho ProN";
 
@@ -69,6 +80,8 @@
   flex-direction: column;
 
   transition: left 0.4s ease-out;
+
+  margin: auto;
 }
 
 .file-list{
@@ -85,6 +98,7 @@
 .list-element{
   display: flex;
   padding: 10px;
+  align-items: center;
 }
 
 .list-element:hover,
@@ -95,10 +109,13 @@
 }
 
 .list-filetype{
-  width: 40px;
-  height: 40px;
+  width: 60px;
+  height: 45px;
   margin-right: 10px;
   font-size: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .list-info{

@@ -2,19 +2,19 @@
   <div :class="getMusicPlayerState">
     <span class="note">♪</span> <span class="name">サリアの歌</span>
     <input type="range" class="volume" v-model="volume">
-    <audio src="/test.mp3" autoplay></audio>
+    <audio src="/test.mp3"></audio>
   </div>
 </template>
 
 <style scoped>
 .music-player{
   position: fixed;
-  left: -170px;
+  left: -175px;
   top: 25px;
   width: 190px;
   height: 55px;
 
-  font-family: "Hiragino Mincho ProN";
+  font-family: Lato;
 
   color: #fff;
   background: #111;
@@ -24,7 +24,7 @@
   justify-content: flex-start;
   padding-left: 10px;
 
-  transition: left 0.4s ease-out;
+  transition: left 0.35s ease-out;
 }
 
 .music-player.first{
@@ -35,7 +35,7 @@
 
 .music-player:hover{
   left: 0px;
-  transition: left 0.4s ease-out;
+  transition: left 0.35s ease-out;
 }
 
 .note{
@@ -51,7 +51,7 @@
 
 .volume{
   position: absolute;
-  right: -7px;
+  right: -9px;
   top: 18px;
   width: 40px;
   transform: rotate(-90deg);
@@ -69,8 +69,8 @@
    5%{left: -190px}
    15%{left: 0px}
    85%{left: 0px}
-   95%{left: -170px}
-  100%{left: -170px}
+   95%{left: -175px}
+  100%{left: -175px}
 }
 
 </style>
