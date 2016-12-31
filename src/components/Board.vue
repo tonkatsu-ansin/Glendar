@@ -20,7 +20,6 @@
   width: 100%;
   height: 100%;
 
-  background: url(http://blogimg.goo.ne.jp/user_image/6a/58/8961aa1199fcd7141921790d1b222527.jpg);
   background-size: cover;
   background-repeat: no-repeat;
 
@@ -53,6 +52,7 @@
 </style>
 
 <script>
+const WSManager = require("../utilities/WSManager")();
 module.exports = {
 	props: [ "sizes" ],
   data: () => {
@@ -60,6 +60,16 @@ module.exports = {
       stores: require("../stores/Stores")
 		}
 	},
+  created(){
+    const state = WSManager.database().ref('boards/state');
+
+    state.on('child_changed', (data) => {
+      if(data.key == "background"){
+        this.stores.BoardsStore.boards[0].background = data.val().background;
+        console.log("かわった",  data.val());
+      }
+    });
+  },
   computed: {
     getComponents(){
       return this.stores.ComponentsStore.components;
@@ -68,6 +78,7 @@ module.exports = {
       return {
         width : `${this.sizes.x * 40}px`,
         height: `${this.sizes.y * 40}px`,
+        backgroundImage: `url(${this.stores.BoardsStore.boards[0].background})`
       }
     }
   },

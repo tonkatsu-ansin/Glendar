@@ -3,7 +3,7 @@
     <div class="dialog-overlay" v-on:click="dismiss"></div>
     <div class="dialog-body">
       <ul class="file-list">
-        <li class="list-element" v-on:click="selectFile(number)">
+        <li class="list-element" v-on:click="uploadFile">
           <div class="list-filetype">
             <span>+</span>
           </div>
@@ -13,20 +13,20 @@
           </div>
         </li>
 
-        <li v-for="number in 10" :class="{'list-element': true, 'active': number == active}" v-on:click="selectFile(number)">
-          <div class="list-filetype">
-            <span>♪</span>
-          </div>
+        <li v-for="(asset, index) in assets" :class="{'list-element': true, 'active': index == active}" v-on:click="selectFile(index)">
+
+          <div v-if="getFileType(asset.filename) == 'image'" class="list-filetype" :style="{'background-image': 'url(http://glendar.s3-website-ap-northeast-1.amazonaws.com/'+ asset.filename + ')'  }"></div>
+          <div v-if="getFileType(asset.filename) == 'music'" class="list-filetype">♪</div>
 
           <div class="list-info">
-            <span class="list-filename">ファイル名ファイル名ファイル名</span>
-            <span class="list-filepath">https://potato4d.me/res/images/icon.png</span>
+            <span class="list-filename">{{asset.key}}</span>
+            <span class="list-filepath">http://glendar.s3-website-ap-northeast-1.amazonaws.com/{{asset.filename}}</span>
           </div>
         </li>
       </ul>
 
       <div class="dialog-buttons">
-        <button type="button" name="button" class="submit-button">決定</button>
+        <button type="button" name="button" class="submit-button" v-on:click="enterFile">決定</button>
         <button type="button" name="button" class="cancel-button" v-on:click="dismiss">キャンセル</button>
       </div>
     </div>
@@ -89,6 +89,7 @@
   margin: 0;
   list-style: none;
   color: #333;
+  width: 100%;
   height: calc(100% - 75px);
   font-family: Lato;
 
@@ -109,18 +110,23 @@
 }
 
 .list-filetype{
-  width: 60px;
+  width: 45px;
   height: 45px;
   margin-right: 10px;
   font-size: 30px;
   display: flex;
   align-items: center;
   justify-content: center;
+
+  background-size: cover;
+  background-repeat: no-repeat;
 }
 
 .list-info{
   display: flex;
   flex-wrap: wrap;
+  flex-direction: column;
+  flex: 1;
 }
 
 .list-filename{
@@ -162,19 +168,69 @@ button{
 </style>
 
 <script>
+const WSManager = require("../../utilities/WSManager")();
 module.exports = {
   data: ()=>{
     return {
       stores: require("../../stores/Stores"),
-      active: -1
+      active: -1,
+      assets: []
     }
   },
+  created(){
+    const assetsListener = WSManager.database().ref('boards/assets');
+    assetsListener.on("child_added", (data) => {
+      this.assets.push(data.val());
+    });
+  },
   methods: {
+    getFileType(filename){
+      const f = filename.split('.');
+
+      switch ( (f[f.length-1].toLowerCase()) ) {
+        case "jpg":
+        case "jpeg":
+        case "png":
+          return "image";
+          break;
+
+        case "wav":
+        case "mp3":
+          return "music";
+          break;
+        default:
+      }
+      return ;
+    },
     selectFile(target){
       this.active = target;
     },
     dismiss(){
       this.stores.ApplicationStore.isOpenFileDialog = false;
+    },
+    uploadFile(){
+
+    },
+    enterFile(){
+      const target = this.assets[this.active];
+      console.log(target);
+
+      switch (this.getFileType(target.key)) {
+        case "image": {
+          const background = `http://glendar.s3-website-ap-northeast-1.amazonaws.com/${target.filename}`;
+          console.log(background);
+          WSManager.database().ref(`/boards/state/background`).update({
+            background
+          });
+        }
+          break;
+
+        case "music": {
+
+        }
+          break;
+      }
+      this.dismiss();
     }
   }
 }

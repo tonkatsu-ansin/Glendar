@@ -73,6 +73,12 @@ module.exports = {
 	},
 	methods: {
 		initialize(){
+
+      WSManager.database().ref(`/boards/state`).once("value")
+      .then((data)=>{
+        this.stores.BoardsStore.boards[0].background = data.val().background;
+      });
+
       const components = WSManager.database().ref('boards/components/components');
       components.once("value")
       .then((data)=>{
