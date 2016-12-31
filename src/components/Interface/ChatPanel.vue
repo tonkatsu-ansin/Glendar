@@ -127,9 +127,9 @@ module.exports = {
   },
   methods: {
     goBottom(){
-      let obj = this.$el.querySelector(".logs");
+      const obj = this.$el.querySelector(".logs");
       console.log(obj.scrollHeight);
-      obj.scrollTop = obj.scrollHeight;
+      obj.scrollTop = obj.scrollHeight + 50;
     },
     send(e){
       const TimeStamp = require("../../utilities/TimeStamp");
