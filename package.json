@@ -4,7 +4,7 @@
   "description": "Vue.js develop template.",
   "main": "src/index.js",
   "scripts": {
-    "heroku": "export > .env ; npm run build;node server.js",
+    "heroku": "export > .env ; npm run build; cat /app/npm-debug.log",
     "start": "npm run serve",
     "lint": "eslint ./src/ --ext=js,vue",
     "lint:fix": "eslint ./src --fix --ext=js,vue",
