@@ -6,6 +6,8 @@
     <form v-on:submit.prevent="send">
       <input v-model="message.user" class="user" placeholder="名無し" required>
       <input v-model="message.text" class="text" placeholder="body here..." required>
+      <input v-model="message.color" class="color" required>
+      <input v-model="message.color"  type="color" required>
       <button type="submit" name="button">送信</button>
     </form>
   </div>
@@ -63,6 +65,13 @@ form .user{
   font-size: 12px;
 }
 
+form .color{
+  width: calc(100% - 540px);
+  height: 24px;
+  outline: none;
+
+  font-size: 12px;
+}
 form .text{
   width: calc(100% - 220px);
   height: 24px;
@@ -97,7 +106,8 @@ module.exports = {
     return {
       message: {
         user: "",
-        text: ""
+        text: "",
+        color: "#000"
       },
       stores: require("../../stores/Stores")
     }
