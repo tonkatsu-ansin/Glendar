@@ -59,11 +59,6 @@
   cursor: pointer;
 }
 
-.dragging{
-  pointer-events: none;
-  opacity: 0.2;
-}
-
 @keyframes musicanim {
    0% {left: -190px}
    5%{left: -190px}
