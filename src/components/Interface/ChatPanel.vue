@@ -16,10 +16,11 @@
 .logs{
   list-style: none;
   padding: 0;
-  margin: 0;
+  margin: 10px;
 
-  height: 125px;
+  height: 120px;
   overflow: auto;
+  background: #fff;
 }
 
 .logs .log{
@@ -29,15 +30,10 @@
 }
 
 .chat-panel{
-  position: fixed;
-  left: 25px;
-  bottom: 25px;
-  width: calc(100% - 425px);
-  height: 175px;
+  width: calc(100% - 310px);
+  height: 180px;
 
-  background: #fff;
-
-  box-shadow: 0 3px 6px rgba(0,0,0,0.1);
+  background: #555;
 }
 
 .dragging{
@@ -46,11 +42,10 @@
 }
 
 form{
-  background: #f5f5f5;
   width: calc(100% - 20px);
-  height: 50px;
+  height: 40px;
   display: flex;
-  align-items: center;
+  align-items: flex-start;;
   justify-content: space-between;
   padding: 0 10px;
 }

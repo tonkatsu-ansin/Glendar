@@ -62,8 +62,8 @@ module.exports = {
           Object.create(null),
           this.component,
           {
-            x: Math.max( Math.min( Math.floor( (e.pageX - 390) / gridsize), this.stores.BoardsStore.boards[0].x), 0),
-            y: Math.max( Math.min( Math.floor( (e.pageY - 400) / gridsize), this.stores.BoardsStore.boards[0].y), 0),
+            x: Math.max( Math.min( Math.floor( (e.pageX + 10) / gridsize), this.stores.BoardsStore.boards[0].x), 0),
+            y: Math.max( Math.min( Math.floor( (e.pageY     ) / gridsize), this.stores.BoardsStore.boards[0].y), 0),
           }
         )
       );
@@ -74,8 +74,8 @@ module.exports = {
           Object.create(null),
           this.component,
           {
-            x: Math.max( Math.min( Math.floor( (e.pageX - 390) / gridsize), this.stores.BoardsStore.boards[0].x), 0),
-            y: Math.max( Math.min( Math.floor( (e.pageY - 400) / gridsize), this.stores.BoardsStore.boards[0].y), 0),
+            x: Math.max( Math.min( Math.floor( (e.pageX + 10) / gridsize), this.stores.BoardsStore.boards[0].x), 0),
+            y: Math.max( Math.min( Math.floor( (e.pageY     ) / gridsize), this.stores.BoardsStore.boards[0].y), 0),
           }
         )
       );

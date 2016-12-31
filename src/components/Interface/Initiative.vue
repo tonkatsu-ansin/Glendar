@@ -1,6 +1,12 @@
 <template lang="html">
-  <div :class="{ 'component-infomation': true, 'dragging': this.stores.ApplicationStore.isDragging }">
-    <ul class="initiative-wrapper">
+  <div :class="{ 'initiative': true, 'dragging': this.stores.ApplicationStore.isDragging }">
+    <charactor-about :charactor="charactor" v-for="charactor in getCharactors" v-on:click="clickCharactor" v-on:hover="hoverCharactor"></charactor-about>
+      <charactor-about :charactor="charactor" v-for="charactor in getCharactors" v-on:click="clickCharactor" v-on:hover="hoverCharactor"></charactor-about>
+        <charactor-about :charactor="charactor" v-for="charactor in getCharactors" v-on:click="clickCharactor" v-on:hover="hoverCharactor"></charactor-about>
+          <charactor-about :charactor="charactor" v-for="charactor in getCharactors" v-on:click="clickCharactor" v-on:hover="hoverCharactor"></charactor-about>
+            <charactor-about :charactor="charactor" v-for="charactor in getCharactors" v-on:click="clickCharactor" v-on:hover="hoverCharactor"></charactor-about>
+
+    <!-- <ul class="initiative-wrapper">
       <li>
         <ul class="initiative-header initiative-column">
           <li>名前</li>
@@ -24,7 +30,7 @@
           <li>{{charactor.memo}}</li>
         </ul>
       </li>
-    </ul>
+    </ul> -->
   </div>
 </template>
 
@@ -60,16 +66,14 @@
   overflow: auto;
 }
 
-.component-infomation{
-  position: fixed;
+.initiative{
+  /*position: fixed;
   bottom: 25px;
-  right: 25px;
-  width: 350px;
-  height: calc(50% - 50px);
+  right: 25px;*/
+  width: 300px;
+  height: calc(100% - 530px);
 
   background: #fff;
-
-  box-shadow: 0 3px 6px rgba(0,0,0,0.1);
 
   overflow: auto;
 }
@@ -95,5 +99,17 @@ module.exports = {
       })
     }
   },
+  methods: {
+    hoverCharactor(charactor){
+      console.log(charactor);
+      // this.stores.ComponentsStore.activeId = charactor.id;
+      // this.stores.ComponentsStore.active = charactor;
+    },
+    clickCharactor(charactor){
+      console.log(charactor);
+      this.stores.ComponentsStore.activeId = charactor.id;
+      this.stores.ComponentsStore.active = charactor;
+    }
+  }
 }
 </script>

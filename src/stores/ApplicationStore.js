@@ -1,5 +1,5 @@
 module.exports = {
   isDragging: false,
-  isFullDetail: false,
+  isFullDetail: true,
   isOpenFileDialog: false
 };

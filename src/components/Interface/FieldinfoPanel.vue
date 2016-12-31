@@ -1,38 +1,51 @@
 <template lang="html">
   <div class="fieldinfo-panel">
-    <p>
-      a
-    </p>
+    <ul class="element-list">
+      <div class="panel-element">
+        <span class="element-icon" style="color:#E6BD4D">☀</span> 12:00
+      </div>
+
+      <div class="panel-element">
+        <span class="element-icon" style="color:#00A6F0">♪</span> いつか終わる夢
+      </div>
+
+      <div class="panel-element">
+        <span class="element-icon">🌊</span> 富嶽三十六景
+      </div>
+    </ul>
   </div>
 </template>
 
 <style scoped>
 
-.logs{
-  list-style: none;
+.element-list{
+  margin: 10px;
   padding: 0;
-  margin: 0;
-
-  height: 125px;
-  overflow: auto;
+  list-style: none;
 }
 
-.logs .log{
-  padding: 5px 10px;
-  font-size: 12px;
-  font-weight: bold;
+.panel-element{
+  margin-bottom: 10px;
+  font-size: 18px;
+  color: #fff;
+  font-weight: 600;
+}
+
+.element-icon{
+  font-size: 24px;
 }
 
 .fieldinfo-panel{
-  position: fixed;
-  left: calc(100% - 725px);
-  bottom: 25px;
-  width: 325px;
-  height: 175px;
+  /*position: fixed;*/
+  /*left: calc(100% - 725px);*/
+  /*bottom: 25px;*/
+  width: 315px;
+  height: 180px;
 
-  background: #fff;
+  background: #555;
 
-  box-shadow: 0 3px 6px rgba(0,0,0,0.1);
+  /*box-shadow: 0 3px 6px rgba(0,0,0,0.1);*/
+  font-family: "Hiragino Sans";
 }
 
 .dragging{
@@ -80,6 +93,6 @@ form button{
 
 <script>
 module.exports = {
-  
+
 }
 </script>
