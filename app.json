@@ -1,5 +1,5 @@
 {
-  "name": "Glendar",
+  "name": "glendar-frontend",
   "scripts": {
     "postdeploy": "npm run build:heroku"
   },
