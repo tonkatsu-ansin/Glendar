@@ -9,7 +9,7 @@
 <style scoped>
 .music-player{
   position: fixed;
-  left: -175px;
+  left: -190px;
   top: 25px;
   width: 190px;
   height: 55px;
@@ -69,8 +69,8 @@
    5%{left: -190px}
    15%{left: 0px}
    85%{left: 0px}
-   95%{left: -175px}
-  100%{left: -175px}
+   95%{left: -190px}
+  100%{left: -190px}
 }
 
 </style>
