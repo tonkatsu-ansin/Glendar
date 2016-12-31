@@ -154,7 +154,7 @@ module.exports = {
       Fetch("",
         "POST",
         JSON.stringify({
-          color : "#999",
+          color : this.message.color,
           user  : this.message.user || "名無し",
           text  : this.message.text,
           time  : TimeStamp.makeTime()
