@@ -29,6 +29,7 @@
   padding: 5px 10px;
   font-size: 12px;
   font-weight: bold;
+  word-break: break-all;
 }
 
 .chat-panel{
