@@ -6,8 +6,8 @@
 			<div class="bottom-bar">
 	    	<chat-panel></chat-panel>
   	    <fieldinfo-panel></fieldinfo-panel>
-				<!-- <music-player></music-player>
-		    <file-select></file-select> -->
+				<music-player></music-player>
+		    <!-- <file-select></file-select> -->
 			</div>
 		</div>
 

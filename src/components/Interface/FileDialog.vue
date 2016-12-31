@@ -219,7 +219,7 @@ module.exports = {
         case "image": {
           const background = `http://glendar.s3-website-ap-northeast-1.amazonaws.com/${target.filename}`;
           console.log(background);
-          WSManager.database().ref(`/boards/state/background`).update({
+          WSManager.database().ref(`/boards/state`).update({
             background
           });
         }

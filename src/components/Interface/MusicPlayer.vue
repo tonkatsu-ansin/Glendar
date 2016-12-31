@@ -9,7 +9,7 @@
 <style scoped>
 .music-player{
   position: fixed;
-  left: -190px;
+  left: -200px;
   top: 25px;
   width: 190px;
   height: 55px;
@@ -60,12 +60,12 @@
 }
 
 @keyframes musicanim {
-   0% {left: -190px}
-   5%{left: -190px}
+   0% {left: -200px}
+   5%{left: -200px}
    15%{left: 0px}
    85%{left: 0px}
-   95%{left: -190px}
-  100%{left: -190px}
+   95%{left: -200px}
+  100%{left: -200px}
 }
 
 </style>

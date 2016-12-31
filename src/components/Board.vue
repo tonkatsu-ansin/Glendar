@@ -65,7 +65,7 @@ module.exports = {
 
     state.on('child_changed', (data) => {
       if(data.key == "background"){
-        this.stores.BoardsStore.boards[0].background = data.val().background;
+        this.stores.BoardsStore.boards[0].background = data.val();
         console.log("かわった",  data.val());
       }
     });
