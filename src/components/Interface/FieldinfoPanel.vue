@@ -36,9 +36,6 @@
 }
 
 .fieldinfo-panel{
-  /*position: fixed;*/
-  /*left: calc(100% - 725px);*/
-  /*bottom: 25px;*/
   width: 315px;
   height: 180px;
 

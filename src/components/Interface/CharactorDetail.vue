@@ -21,9 +21,6 @@
 
 <style scoped>
 .charactor-detail{
-  /*position: fixed;*/
-  /*top: 25px;*/
-  /*right: 25px;*/
   width: 300px;
   height: 350px;
 
@@ -109,20 +106,20 @@ module.exports = {
       this.stores.ApplicationStore.isFullDetail = false;
     },
     updateStatus(key, name, param){
-      console.log(key, name, param);
-      const data = {
-        status: {}
-      };
+      const rawData = this.stores.ComponentsStore.active;
+      const data = {status: {}};
       data.status[name] = param;
 
-      console.log(this.stores.ComponentsStore.active);
+      const sendData = this.stores.ComponentsStore.active;
+      sendData.status = Object.assign(
+        Object.create(null),
+        this.stores.ComponentsStore.active.status,
+        data.status
+      );
 
-      // WSManager.database().ref(`/boards/components/components/${key}`).update(
-      //   Object.assign(
-      //     this.stores.ComponentsStore.active,
-      //     data
-      //   )
-      // );
+      WSManager.database().ref(`/boards/components/components/${key}`).update(
+        sendData
+      );
     }
   }
 }
