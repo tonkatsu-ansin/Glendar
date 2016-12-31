@@ -1,36 +1,10 @@
 <template lang="html">
   <div :class="{ 'initiative': true, 'dragging': this.stores.ApplicationStore.isDragging }">
     <charactor-about :charactor="charactor" v-for="charactor in getCharactors" v-on:click="clickCharactor" v-on:hover="hoverCharactor"></charactor-about>
-      <charactor-about :charactor="charactor" v-for="charactor in getCharactors" v-on:click="clickCharactor" v-on:hover="hoverCharactor"></charactor-about>
-        <charactor-about :charactor="charactor" v-for="charactor in getCharactors" v-on:click="clickCharactor" v-on:hover="hoverCharactor"></charactor-about>
-          <charactor-about :charactor="charactor" v-for="charactor in getCharactors" v-on:click="clickCharactor" v-on:hover="hoverCharactor"></charactor-about>
-            <charactor-about :charactor="charactor" v-for="charactor in getCharactors" v-on:click="clickCharactor" v-on:hover="hoverCharactor"></charactor-about>
-
-    <!-- <ul class="initiative-wrapper">
-      <li>
-        <ul class="initiative-header initiative-column">
-          <li>名前</li>
-          <li>HP</li>
-          <li>MP</li>
-          <li>防護点</li>
-          <li>移動力</li>
-          <li>行動</li>
-          <li>その他</li>
-        </ul>
-      </li>
-
-      <li v-for="charactor in getCharactors">
-        <ul class="initiative-component initiative-column">
-          <li>{{charactor.name}}</li>
-          <li>{{charactor.status.hp}} / {{charactor.status.max_hp}}</li>
-          <li>{{charactor.status.mp}} / {{charactor.status.max_mp}}</li>
-          <li>{{charactor.status.move}}</li>
-          <li>{{charactor.status.protection}}</li>
-          <li><input type="checkbox" name="" value=""></li>
-          <li>{{charactor.memo}}</li>
-        </ul>
-      </li>
-    </ul> -->
+    <charactor-about :charactor="charactor" v-for="charactor in getCharactors" v-on:click="clickCharactor" v-on:hover="hoverCharactor"></charactor-about>
+    <charactor-about :charactor="charactor" v-for="charactor in getCharactors" v-on:click="clickCharactor" v-on:hover="hoverCharactor"></charactor-about>
+    <charactor-about :charactor="charactor" v-for="charactor in getCharactors" v-on:click="clickCharactor" v-on:hover="hoverCharactor"></charactor-about>
+    <charactor-about :charactor="charactor" v-for="charactor in getCharactors" v-on:click="clickCharactor" v-on:hover="hoverCharactor"></charactor-about>
   </div>
 </template>
 
@@ -67,9 +41,6 @@
 }
 
 .initiative{
-  /*position: fixed;
-  bottom: 25px;
-  right: 25px;*/
   width: 300px;
   height: calc(100% - 530px);
 
