@@ -48,8 +48,5 @@
     "webpack-dev-server": "^1.16.2",
     "webpack-dotenv-plugin": "^1.4.0",
     "whatwg-fetch": "^1.0.0"
-  },
-  "dependencies": {
-    "vue-validator": "^3.0.0-alpha.2"
   }
 }

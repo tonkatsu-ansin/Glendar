@@ -90,7 +90,6 @@
 
 <script>
 const WSManager = require("../../utilities/WSManager")();
-const validator = require("vue-validator");
 
 module.exports = {
 	props: ["charactor"],
