@@ -3,4 +3,4 @@ module.exports = {
   MessagesStore    : require("./MessagesStore"),
   ComponentsStore  : require("./ComponentsStore"),
   ApplicationStore : require("./ApplicationStore")
-}
+};

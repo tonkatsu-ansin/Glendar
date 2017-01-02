@@ -30,24 +30,24 @@ Vue.component("charactor-detail" , require("./components/Interface/CharactorDeta
 // Pages
 
 const Welcomes = {
-	index: require("./pages/welcomes/index.vue")
+  index: require("./pages/welcomes/index.vue")
 };
 
 // Routing
 
 const routes = [
-	{
-		path: "/",
-		component: Welcomes["index"]
-	}
+  {
+    path: "/",
+    component: Welcomes["index"]
+  }
 ];
 
 const router = new VueRouter({
-	routes: routes
+  routes: routes
 });
 
 const app = new Vue({
-	el: "#app",
-	render: h => h(App),
-	router
+  el: "#app",
+  render: h => h(App),
+  router
 });
