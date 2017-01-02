@@ -5,7 +5,10 @@
     <div class="charactor-status" v-if="active">
       <dl v-for="(param, name) in active.status" v-if="active.type == 'charactor'">
         <dt>{{name}}</dt>
-        <dd><input v-model="active.status[name]" v-on:blur.prevent="updateStatus(active.key, name, param)"></dd>
+        <dd>
+          <input v-model="active.status[name]" v-on:blur.prevent="updateStatus(active.key, name, param)">
+          <div class="error-message" v-if=!validator(param)>数値を入れてね</div>
+        </dd>
       </dl>
     </div>
 
@@ -79,10 +82,15 @@
 .charactor-status dd{
 
 }
+.error-message {
+  color: #D03B3B;
+
+}
 </style>
 
 <script>
 const WSManager = require("../../utilities/WSManager")();
+const validator = require("vue-validator");
 
 module.exports = {
 	props: ["charactor"],
@@ -100,7 +108,15 @@ module.exports = {
     close(){
       this.stores.ApplicationStore.isFullDetail = false;
     },
+    validator(param) {
+      console.log(param);
+      return Number.isFinite(parseInt(param, 10));
+    },
     updateStatus(key, name, param){
+      console.log(key, name, param);
+      if(!this.validator(param)) {
+        return ;
+      }
       const rawData = this.stores.ComponentsStore.active;
       const data = {status: {}};
       data.status[name] = param;
