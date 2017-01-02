@@ -6,8 +6,8 @@
 			<div class="bottom-bar">
 	    	<chat-panel></chat-panel>
   	    <fieldinfo-panel></fieldinfo-panel>
-				<!-- <music-player></music-player>
-		    <file-select></file-select> -->
+				<music-player></music-player>
+		    <!-- <file-select></file-select> -->
 			</div>
 		</div>
 
@@ -73,6 +73,16 @@ module.exports = {
 	},
 	methods: {
 		initialize(){
+
+      WSManager.database().ref(`/boards/state`).once("value")
+      .then((data)=>{
+        this.stores.BoardsStore.boards[0].background = data.val().background;
+        this.stores.BoardsStore.boards[0].music = data.val().music;
+        console.log(
+          this.stores.BoardsStore.boards[0]
+        )
+      });
+
       const components = WSManager.database().ref('boards/components/components');
       components.once("value")
       .then((data)=>{
