@@ -244,7 +244,10 @@ module.exports = {
 
       switch (this.getFileType(target.key)) {
         case "image": {
-          const background = `http://glendar.s3-website-ap-northeast-1.amazonaws.com/${target.filename}`;
+          const background = {
+            key  : target.key,
+            path : `http://glendar.s3-website-ap-northeast-1.amazonaws.com/${target.filename}`
+          }
           console.log(background);
           WSManager.database().ref(`/boards/state`).update({
             background
@@ -253,7 +256,14 @@ module.exports = {
           break;
 
         case "music": {
-
+          const music = {
+            key  : target.key,
+            path : `http://glendar.s3-website-ap-northeast-1.amazonaws.com/${target.filename}`
+          };
+          console.log(music);
+          WSManager.database().ref(`/boards/state`).update({
+            music
+          });
         }
           break;
       }

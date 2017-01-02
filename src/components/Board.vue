@@ -78,7 +78,7 @@ module.exports = {
       return {
         width : `${this.sizes.x * 40}px`,
         height: `${this.sizes.y * 40}px`,
-        backgroundImage: `url(${this.stores.BoardsStore.boards[0].background})`
+        backgroundImage: `url(${this.stores.BoardsStore.boards[0].background.path})`
       }
     }
   },

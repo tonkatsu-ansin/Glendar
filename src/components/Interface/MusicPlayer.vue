@@ -1,8 +1,8 @@
 <template lang="html">
   <div :class="getMusicPlayerState">
-    <span class="note">♪</span> <span class="name">サリアの歌</span>
+    <span class="note">♪</span> <span class="name" v-if="stores.BoardsStore.boards[0].music">{{ stores.BoardsStore.boards[0].music.key }}</span>
     <input type="range" class="volume" v-model="volume">
-    <audio src="/test.mp3"></audio>
+    <audio :src="stores.BoardsStore.boards[0].music.path" v-if="stores.BoardsStore.boards[0].music" autoplay></audio>
   </div>
 </template>
 
@@ -71,13 +71,14 @@
 </style>
 
 <script>
+const WSManager = require("../../utilities/WSManager")();
 module.exports = {
 	props: ["component"],
   data: ()=>{
     return {
       stores: require("../../stores/Stores"),
       name: "God",
-      volume: 100,
+      volume: 50,
       isFirst: true
     }
   },
@@ -87,10 +88,14 @@ module.exports = {
     }
   },
   created(){
-    console.log(this);
-    setTimeout(()=>{
-      this.isFirst = false;
-    }, 5000);
+    const state = WSManager.database().ref('boards/state');
+
+    state.on('child_changed', (data) => {
+      if(data.key == "music"){
+        this.stores.BoardsStore.boards[0].music = data.val();
+        console.log("かわった",  data.val());
+      }
+    });
   },
   computed: {
     getCharactors(){

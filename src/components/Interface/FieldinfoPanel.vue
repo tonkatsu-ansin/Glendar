@@ -6,12 +6,13 @@
       </div>
 
       <div class="panel-element">
-        <span class="element-icon" style="color:#00A6F0">♪</span> いつか終わる夢
+        <span class="element-icon" style="color:#00A6F0">♪</span> {{ stores.BoardsStore.boards[0].music.key }}
       </div>
 
       <div class="panel-element">
-        <span class="element-icon">🌊</span> 富嶽三十六景
+        <span class="element-icon">🌊</span> {{ stores.BoardsStore.boards[0].background.key }}
       </div>
+      <a href="#" v-on:click.prevent="openModal">背景/音楽変更</a>
     </ul>
   </div>
 </template>
@@ -85,6 +86,15 @@ form button{
 
 <script>
 module.exports = {
-
+  data: ()=>{
+    return {
+      stores: require("../../stores/Stores")
+    }
+  },
+  methods: {
+    openModal(){
+      this.stores.ApplicationStore.isOpenFileDialog = true;
+    }
+  }
 }
 </script>
