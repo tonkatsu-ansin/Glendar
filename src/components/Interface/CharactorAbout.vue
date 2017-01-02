@@ -55,14 +55,12 @@
 </style>
 
 <script>
-const WSManager = require("../../utilities/WSManager")();
-
 module.exports = {
-	props: ["charactor"],
+  props: ["charactor"],
   data: ()=>{
     return {
       stores: require("../../stores/Stores")
-    }
+    };
   },
   methods: {
     hoverAbout(){
@@ -72,5 +70,5 @@ module.exports = {
       this.$emit("click", this.charactor);
     }
   }
-}
+};
 </script>

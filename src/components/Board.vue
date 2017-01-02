@@ -54,16 +54,16 @@
 <script>
 const WSManager = require("../utilities/WSManager")();
 module.exports = {
-	props: [ "sizes" ],
+  props: [ "sizes" ],
   data: () => {
-		return {
+    return {
       stores: require("../stores/Stores")
-		}
-	},
+    };
+  },
   created(){
-    const state = WSManager.database().ref('boards/state');
+    const state = WSManager.database().ref("boards/state");
 
-    state.on('child_changed', (data) => {
+    state.on("child_changed", (data) => {
       if(data.key == "background"){
         this.stores.BoardsStore.boards[0].background = data.val();
         console.log("かわった",  data.val());
@@ -79,11 +79,11 @@ module.exports = {
         width : `${this.sizes.x * 40}px`,
         height: `${this.sizes.y * 40}px`,
         backgroundImage: `url(${this.stores.BoardsStore.boards[0].background.path})`
-      }
+      };
     }
   },
   methods: {
 
   }
-}
+};
 </script>
