@@ -4,8 +4,6 @@ Vue.use(VueRouter);
 
 const App = Vue.extend(require("./App.vue"));
 
-const Fetch = require("./utilities/Fetch");
-
 // Stores
 
 // Components
@@ -46,7 +44,7 @@ const router = new VueRouter({
   routes: routes
 });
 
-const app = new Vue({
+new Vue({
   el: "#app",
   render: h => h(App),
   router

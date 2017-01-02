@@ -1,5 +1,5 @@
 <template lang="html">
-  <div :class="{ 'chat-panel': true, 'dragging': this.stores.ApplicationStore.isDragging }">
+  <div :class="{ "chat-panel": true, "dragging": this.stores.ApplicationStore.isDragging }">
     <ul class="logs">
       <li v-for="message in stores.MessagesStore.messages" class="log" :style="{color: message.color}">{{message.time}}: {{message.user}} {{message.text}}</li>
     </ul>
@@ -102,12 +102,12 @@ form button{
 const WSManager = require("../../utilities/WSManager")();
 const Fetch = require("../../utilities/Fetch");
 module.exports = {
-	props: ["component"],
-	beforeRouteEnter(from, to, next){
-		next(vm=>{
-			vm.initialize();
-		});
-	},
+  props: ["component"],
+  beforeRouteEnter(from, to, next){
+    next(vm=>{
+      vm.initialize();
+    });
+  },
   data: ()=>{
     return {
       message: {
@@ -116,10 +116,10 @@ module.exports = {
         color: "#000"
       },
       stores: require("../../stores/Stores")
-    }
+    };
   },
   created(){
-    const messages = WSManager.database().ref('boards/chat');
+    const messages = WSManager.database().ref("boards/chat");
 
     messages.on("child_added", (data) => {
       this.stores.MessagesStore.messages.push(data.val());
@@ -127,21 +127,12 @@ module.exports = {
         this.goBottom();
       }, 32);
     });
-
-    // messages.once("value")
-    // .then((data)=>{
-    //   data = data.val()
-    //   console.log(data);
-    //   Object.keys(data).forEach((key)=>{
-    //     this.stores.MessagesStore.messages.push(data[key]);
-    //   })
-    // })
   },
   computed: {
     getActiveComponent(){
       return this.stores.ComponentsStore.components.find((component)=>{
         return this.stores.ComponentsStore.activeId == component.id;
-      })
+      });
     }
   },
   methods: {
@@ -150,7 +141,7 @@ module.exports = {
       console.log(obj.scrollHeight);
       obj.scrollTop = obj.scrollHeight + 50;
     },
-    send(e){
+    send(){
       const TimeStamp = require("../../utilities/TimeStamp");
       Fetch("",
         "POST",
@@ -164,5 +155,5 @@ module.exports = {
       this.message.text =  "";
     }
   }
-}
+};
 </script>

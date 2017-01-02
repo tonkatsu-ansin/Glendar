@@ -73,24 +73,24 @@
 <script>
 const WSManager = require("../../utilities/WSManager")();
 module.exports = {
-	props: ["component"],
+  props: ["component"],
   data: ()=>{
     return {
       stores: require("../../stores/Stores"),
       name: "God",
       volume: 50,
       isFirst: true
-    }
+    };
   },
   watch: {
-    "volume": function(e){
+    "volume": function(){
       this.$el.querySelector("audio").volume = this.volume * 0.01;
     }
   },
   created(){
-    const state = WSManager.database().ref('boards/state');
+    const state = WSManager.database().ref("boards/state");
 
-    state.on('child_changed', (data) => {
+    state.on("child_changed", (data) => {
       if(data.key == "music"){
         this.stores.BoardsStore.boards[0].music = data.val();
         console.log("かわった",  data.val());
@@ -101,15 +101,15 @@ module.exports = {
     getCharactors(){
       return this.stores.ComponentsStore.components.filter((component)=>{
         return component.type == "charactor";
-      })
+      });
     },
     getMusicPlayerState(){
       return {
-        'music-player': true,
-        'first': this.isFirst,
-        'dragging': this.stores.ApplicationStore.isDragging
-      }
+        "music-player": true,
+        "first": this.isFirst,
+        "dragging": this.stores.ApplicationStore.isDragging
+      };
     }
   },
-}
+};
 </script>

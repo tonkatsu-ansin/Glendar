@@ -13,10 +13,10 @@
           </div>
         </li>
 
-        <li v-for="(asset, index) in assets" :class="{'list-element': true, 'active': index == active}" v-on:click="selectFile(index)">
+        <li v-for="(asset, index) in assets" :class="{"list-element": true, "active": index == active}" v-on:click="selectFile(index)">
 
-          <div v-if="getFileType(asset.filename) == 'image'" class="list-filetype" :style="{'background-image': 'url(http://glendar.s3-website-ap-northeast-1.amazonaws.com/'+ asset.filename + ')'  }"></div>
-          <div v-else-if="getFileType(asset.filename) == 'music'" class="list-filetype">♪</div>
+          <div v-if="getFileType(asset.filename) == "image"" class="list-filetype" :style="{"background-image": "url(http://glendar.s3-website-ap-northeast-1.amazonaws.com/"+ asset.filename + ")"  }"></div>
+          <div v-else-if="getFileType(asset.filename) == "music"" class="list-filetype">♪</div>
           <div v-else class="list-filetype">?</div>
 
           <div class="list-info">
@@ -177,7 +177,6 @@ button{
 </style>
 
 <script>
-const Fetch = require("../../utilities/Fetch");
 const WSManager = require("../../utilities/WSManager")();
 module.exports = {
   data: ()=>{
@@ -185,32 +184,28 @@ module.exports = {
       stores: require("../../stores/Stores"),
       active: -1,
       assets: []
-    }
+    };
   },
   created(){
-    const assetsListener = WSManager.database().ref('boards/assets');
+    const assetsListener = WSManager.database().ref("boards/assets");
     assetsListener.on("child_added", (data) => {
       this.assets.push(data.val());
     });
   },
   methods: {
     getFileType(filename){
-      const f = filename.split('.');
+      const f = filename.split(".");
 
       switch ( (f[f.length-1].toLowerCase()) ) {
-        case "jpg":
-        case "jpeg":
-        case "png":
-          return "image";
-          break;
-
-        case "wav":
-        case "mp3":
-          return "music";
-          break;
-        default:
+      case "jpg":
+      case "jpeg":
+      case "png":
+        return "image";
+      case "wav":
+      case "mp3":
+        return "music";
       }
-      return ;
+      return;
     },
     selectFile(target){
       this.active = target;
@@ -243,32 +238,32 @@ module.exports = {
       console.log(target);
 
       switch (this.getFileType(target.key)) {
-        case "image": {
-          const background = {
-            key  : target.key,
-            path : `http://glendar.s3-website-ap-northeast-1.amazonaws.com/${target.filename}`
-          }
-          console.log(background);
-          WSManager.database().ref(`/boards/state`).update({
-            background
-          });
-        }
-          break;
+      case "image": {
+        const background = {
+          key  : target.key,
+          path : `http://glendar.s3-website-ap-northeast-1.amazonaws.com/${target.filename}`
+        };
+        console.log(background);
+        WSManager.database().ref("/boards/state").update({
+          background
+        });
+      }
+        break;
 
-        case "music": {
-          const music = {
-            key  : target.key,
-            path : `http://glendar.s3-website-ap-northeast-1.amazonaws.com/${target.filename}`
-          };
-          console.log(music);
-          WSManager.database().ref(`/boards/state`).update({
-            music
-          });
-        }
-          break;
+      case "music": {
+        const music = {
+          key  : target.key,
+          path : `http://glendar.s3-website-ap-northeast-1.amazonaws.com/${target.filename}`
+        };
+        console.log(music);
+        WSManager.database().ref("/boards/state").update({
+          music
+        });
+      }
+        break;
       }
       this.dismiss();
     }
   }
-}
+};
 </script>

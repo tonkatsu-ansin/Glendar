@@ -89,12 +89,12 @@ module.exports = {
   data: ()=>{
     return {
       stores: require("../../stores/Stores")
-    }
+    };
   },
   methods: {
     openModal(){
       this.stores.ApplicationStore.isOpenFileDialog = true;
     }
   }
-}
+};
 </script>

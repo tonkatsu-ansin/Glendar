@@ -53,17 +53,17 @@
 
 <script>
 module.exports = {
-	props: ["component"],
+  props: ["component"],
   data: ()=>{
     return {
       stores: require("../../stores/Stores")
-    }
+    };
   },
   computed: {
     getCharactors(){
       return this.stores.ComponentsStore.components.filter((component)=>{
         return component.type == "charactor";
-      })
+      });
     }
   },
   methods: {
@@ -78,5 +78,5 @@ module.exports = {
       this.stores.ComponentsStore.active = charactor;
     }
   }
-}
+};
 </script>

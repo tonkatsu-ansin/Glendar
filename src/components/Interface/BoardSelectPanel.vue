@@ -16,6 +16,5 @@
 </style>
 
 <script>
-module.exports = {
-}
+module.exports = {};
 </script>

@@ -33,42 +33,28 @@ const WSManager = require("../utilities/WSManager")();
 const gridsize = 40;
 
 module.exports = {
-	props: ["component"],
+  props: ["component"],
   data: ()=>{
     return {
       stores: require("../stores/Stores")
-    }
+    };
   },
   computed: {
     getPosition(){
       return {
         transform: `translate(${this.component.x*gridsize}px, ${this.component.y*gridsize}px)`
-      }
+      };
     }
   },
   methods: {
-    mouseover(e){
-      console.log(e);
+    mouseover(){
       this.stores.ComponentsStore.activeId = this.component.id;
       this.stores.ComponentsStore.active = this.component;
-      console.log(this.stores.ComponentsStore.activeId);
     },
-    dragstart(e){
+    dragstart(){
       this.stores.ApplicationStore.isDragging = true;
     },
     dragend(e){
-      console.log(
-        Object.assign(
-          Object.create(null),
-          this.component,
-          {
-            x: Math.max( Math.min( Math.floor( (e.pageX + 10) / gridsize), this.stores.BoardsStore.boards[0].x), 0),
-            y: Math.max( Math.min( Math.floor( (e.pageY     ) / gridsize), this.stores.BoardsStore.boards[0].y), 0),
-          }
-        )
-      );
-      console.log(`/boards/components/components/${this.component.key}`);
-
       WSManager.database().ref(`/boards/components/components/${this.component.key}`).update(
         Object.assign(
           Object.create(null),
@@ -83,5 +69,5 @@ module.exports = {
       this.stores.ApplicationStore.isDragging = false;
     }
   }
-}
+};
 </script>

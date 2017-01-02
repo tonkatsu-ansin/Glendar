@@ -92,11 +92,11 @@
 const WSManager = require("../../utilities/WSManager")();
 
 module.exports = {
-	props: ["charactor"],
+  props: ["charactor"],
   data: ()=>{
     return {
       stores: require("../../stores/Stores")
-    }
+    };
   },
   computed: {
     active(){
@@ -113,10 +113,7 @@ module.exports = {
     },
     updateStatus(key, name, param){
       console.log(key, name, param);
-      if(!this.validator(param)) {
-        return ;
-      }
-      const rawData = this.stores.ComponentsStore.active;
+      if(!this.validator(param)) return;
       const data = {status: {}};
       data.status[name] = param;
 
@@ -132,5 +129,5 @@ module.exports = {
       );
     }
   }
-}
+};
 </script>
