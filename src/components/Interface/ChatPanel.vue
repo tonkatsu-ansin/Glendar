@@ -1,5 +1,5 @@
 <template lang="html">
-  <div :class="{ "chat-panel": true, "dragging": this.stores.ApplicationStore.isDragging }">
+  <div :class="{ 'chat-panel': true, 'dragging': this.stores.ApplicationStore.isDragging }">
     <ul class="logs">
       <li v-for="message in stores.MessagesStore.messages" class="log" :style="{color: message.color}">{{message.time}}: {{message.user}} {{message.text}}</li>
     </ul>

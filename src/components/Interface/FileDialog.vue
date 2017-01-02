@@ -13,10 +13,10 @@
           </div>
         </li>
 
-        <li v-for="(asset, index) in assets" :class="{"list-element": true, "active": index == active}" v-on:click="selectFile(index)">
+        <li v-for="(asset, index) in assets" :class="{'list-element': true, 'active': index == active}" v-on:click="selectFile(index)">
 
-          <div v-if="getFileType(asset.filename) == "image"" class="list-filetype" :style="{"background-image": "url(http://glendar.s3-website-ap-northeast-1.amazonaws.com/"+ asset.filename + ")"  }"></div>
-          <div v-else-if="getFileType(asset.filename) == "music"" class="list-filetype">♪</div>
+          <div v-if="getFileType(asset.filename) == 'image'" class="list-filetype" :style="{'background-image': 'url(http://glendar.s3-website-ap-northeast-1.amazonaws.com/'+ asset.filename + ')'  }"></div>
+          <div v-else-if="getFileType(asset.filename) == 'music'" class="list-filetype">♪</div>
           <div v-else class="list-filetype">?</div>
 
           <div class="list-info">
