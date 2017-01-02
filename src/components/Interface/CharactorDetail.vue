@@ -7,7 +7,7 @@
         <dt>{{name}}</dt>
         <dd>
           <input v-model="active.status[name]" v-on:blur.prevent="updateStatus(active.key, name, param)">
-          <div class="error-message" v-if=!validator(param)>数値を入れてね</div>
+          <div class="error-message" v-if="!validator(param)">数値を入れてね</div>
         </dd>
       </dl>
     </div>
