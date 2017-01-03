@@ -112,13 +112,15 @@ module.exports = {
       return isFinite(param);
     },
     updateStatus(key, name, param){
-      this.stores.ComponentsStore.active.status[name] = calcFormula.calcFormula(param.toString());
-
       console.log(key, name, param);
-      if(!this.validator(param)) return;
       const data = {status: {}};
-      data.status[name] = param;
+      try{
+        data.status[name] = calcFormula.calcFormula(param);
+      }catch(e){
+        data.status[name] = param;
+      }
 
+      if(!this.validator(data.status[name])) return;
       const sendData = this.stores.ComponentsStore.active;
       sendData.status = Object.assign(
         Object.create(null),
