@@ -90,6 +90,7 @@
 
 <script>
 const WSManager = require("../../utilities/WSManager")();
+const calcFormula = require("calcFormula");
 
 module.exports = {
   props: ["charactor"],
@@ -108,10 +109,11 @@ module.exports = {
       this.stores.ApplicationStore.isFullDetail = false;
     },
     validator(param) {
-      console.log(param);
-      return Number.isFinite(parseInt(param, 10));
+      return isFinite(param);
     },
     updateStatus(key, name, param){
+      this.stores.ComponentsStore.active.status[name] = calcFormula.calcFormula(param.toString());
+
       console.log(key, name, param);
       if(!this.validator(param)) return;
       const data = {status: {}};
