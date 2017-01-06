@@ -68,7 +68,7 @@ module.exports = {
   },
   methods: {
     dismiss(){
-      this.stores.ApplicationStore.isOpenFileDialog = false;
+      this.stores.ApplicationStore.dialogStateString = "";
     },
   }
 };

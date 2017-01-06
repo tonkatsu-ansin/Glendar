@@ -17,7 +17,7 @@
       <boardselect-panel></boardselect-panel>
     </div>
 
-    <file-dialog v-if="stores.ApplicationStore.isOpenFileDialog"></file-dialog>
+    <file-dialog v-if="stores.ApplicationStore.dialogStateString === 'file'"></file-dialog>
   </div>
 </template>
 
