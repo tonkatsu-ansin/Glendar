@@ -1,6 +1,7 @@
 <template lang="html">
   <div class="board-component" :style="getPosition" draggable="true" v-on:dragstart="dragstart" v-on:dragend="dragend" v-on:mouseover="mouseover" v-on:contextmenu.prevent="emitContext">
-    <img :src="component.image" alt="">
+    <img :src="component.image" alt="" v-if="component.type != 'range'">
+    <div class="range" v-else></div>
   </div>
 </template>
 
@@ -22,6 +23,12 @@
 }
 
 img{
+  width: 39px;
+  height: 39px;
+  pointer-events: none;
+}
+
+.range{
   width: 39px;
   height: 39px;
   pointer-events: none;

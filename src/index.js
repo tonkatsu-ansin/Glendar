@@ -14,9 +14,10 @@ Vue.component("board-component" , require("./components/BoardComponent.vue"));
 // Interfaces
 
 Vue.component("initiative"       , require("./components/Interface/Initiative.vue"));
+Vue.component("range-dialog"     , require("./components/Interface/RangeDialog.vue"));
 Vue.component("file-dialog"      , require("./components/Interface/FileDialog.vue"));
 Vue.component("file-select"      , require("./components/Interface/FileSelect.vue"));
-Vue.component("context-menu"      , require("./components/Interface/ContextMenu.vue"));
+Vue.component("context-menu"     , require("./components/Interface/ContextMenu.vue"));
 Vue.component("music-player"     , require("./components/Interface/MusicPlayer.vue"));
 
 Vue.component("chat-panel"       , require("./components/Interface/ChatPanel.vue"));

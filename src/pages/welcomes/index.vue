@@ -17,6 +17,7 @@
       <boardselect-panel></boardselect-panel>
     </div>
 
+    <range-dialog v-if="stores.ApplicationStore.dialogStateString === 'range'"></range-dialog>
     <file-dialog v-if="stores.ApplicationStore.dialogStateString === 'file'"></file-dialog>
   </div>
 </template>

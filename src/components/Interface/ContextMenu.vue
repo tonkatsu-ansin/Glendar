@@ -2,7 +2,7 @@
   <div class="context-menu" :style="getContextMenuStyle">
     <ul>
       <li>コンポーネントの追加</li>
-      <li>範囲を作成</li>
+      <li v-on:click="makeRange">範囲を作成</li>
       <li v-on:click="dismiss">消す</li>
     </ul>
   </div>
@@ -57,6 +57,10 @@ module.exports = {
   methods: {
     dismiss(){
       this.stores.ApplicationStore.isShowContextMenu = false;
+    },
+    makeRange(){
+      this.dismiss();
+      this.stores.ApplicationStore.dialogStateString = "range";
     }
   }
 };
