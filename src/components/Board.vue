@@ -85,7 +85,6 @@ module.exports = {
   methods: {
     emitContext(e){
       this.$emit("rightclick", e);
-      console.log("poepoe");
       return false;
     },
     makeContextMenu(){
