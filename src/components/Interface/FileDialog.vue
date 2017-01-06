@@ -129,7 +129,7 @@ button{
 const WSManager = require("../../utilities/WSManager")();
 module.exports = {
   components: {
-    'base-dialog': require("./BaseDialog.vue")
+    "base-dialog": require("./BaseDialog.vue")
   },
   data: ()=>{
     return {
