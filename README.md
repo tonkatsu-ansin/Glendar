@@ -1,6 +1,32 @@
-# Modern Vue.js Develop Template.
+# Glendar
 
-This is a boiler plate for building a modern front-end development environment using Vue.js.
+Glendar is FUCKIN AWESOME BEAUTIFUL SwordWorld 2.0 Online Session Tool.
 
-A detailed explanation about this environment will be in Japanese, but it is possible to browse it below.
-http://qiita.com/potato4d/items/55a60f21c26bf889afd5
+## Requirements
+
+* node => 7.0
+* 諦めない心 => 1.0
+
+## Installation
+
+1. Make firebase application.
+
+https://console.firebase.google.com/
+
+2. Write dotenv file.
+
+```dotenv
+FIREBASE_APIKEY=
+FIREBASE_DOMAIN=
+FIREBASE_DATABASE_URL=
+FIREBASE_BUCKET=
+FIREBASE_SENDER=
+DICEAPI_ROOT=
+```
+
+3. Launch Application.
+
+```
+$ npm i
+$ npm start
+```
