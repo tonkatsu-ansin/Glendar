@@ -14,7 +14,7 @@
       </div>
 
       <div class="panel-element">
-        <span class="element-icon">🌊</span>
+        <span class="element-icon background-icon" :style="{'background-image': 'url('+stores.BoardsStore.boards[0].background.path+')' }"></span>
         <span class="element-text">{{ getFileBasename(stores.BoardsStore.boards[0].background.key) }}</span>
       </div>
       <a href="#" v-on:click.prevent="openModal">背景/音楽変更</a>
@@ -46,6 +46,13 @@
   font-size: 24px;
   display: inline-block;
   width: 30px;
+}
+
+.element-icon.background-icon{
+  width: 25px;
+  height: 25px;
+  background-size: cover;
+  background-repeat: no-repeat;
 }
 
 .element-text{
