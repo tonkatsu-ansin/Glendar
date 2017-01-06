@@ -1,5 +1,5 @@
 <template lang="html">
-  <div class="map" v-on:rightclick="makeContextMenu">
+  <div class="map">
     <div class="map-body" v-on:contextmenu.prevent="makeContextMenu" :style="getMapStyle">
       <board-component :component="component" v-for="component in getComponents" v-on:rightclick="makeContextMenu"></board-component>
     </div>
