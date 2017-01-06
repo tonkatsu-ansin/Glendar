@@ -121,8 +121,8 @@ module.exports = {
         name: "",
         volume: 10,
         playerdata: {
-          'music-player': true,
-          'is-animate': false
+          "music-player": true,
+          "is-animate": false
         }
       }
     };
