@@ -1,6 +1,6 @@
 <template lang="html">
-  <div class="map">
-    <div class="map-body" :style="getMapStyle">
+  <div class="map" v-on:rightclick="makeContextMenu">
+    <div class="map-body" v-on:contextmenu.prevent="makeContextMenu" :style="getMapStyle">
       <board-component :component="component" v-for="component in getComponents" v-on:rightclick="makeContextMenu"></board-component>
     </div>
   </div>
@@ -83,6 +83,11 @@ module.exports = {
     }
   },
   methods: {
+    emitContext(e){
+      this.$emit("rightclick", e);
+      console.log("poepoe");
+      return false;
+    },
     makeContextMenu(){
       this.stores.ApplicationStore.isShowContextMenu = true;
       console.log("コンテキストメニューつけた");
