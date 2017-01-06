@@ -19,6 +19,7 @@
     </div>
 
     <file-dialog v-if="stores.ApplicationStore.dialogStateString === 'file'"></file-dialog>
+    <context-menu v-if="stores.ApplicationStore.isShowContextMenu"></context-menu>
   </div>
 </template>
 
