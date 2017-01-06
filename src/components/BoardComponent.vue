@@ -55,13 +55,14 @@ module.exports = {
       this.stores.ApplicationStore.isDragging = true;
     },
     dragend(e){
+      console.log(e);
       WSManager.database().ref(`/boards/components/components/${this.component.key}`).update(
         Object.assign(
           Object.create(null),
           this.component,
           {
-            x: Math.max( Math.min( Math.floor( (e.pageX + 10) / gridsize), this.stores.BoardsStore.boards[0].x), 0),
-            y: Math.max( Math.min( Math.floor( (e.pageY     ) / gridsize), this.stores.BoardsStore.boards[0].y), 0),
+            x: Math.max( Math.min( Math.floor( (e.layerX + 10) / gridsize), this.stores.BoardsStore.boards[0].x), 0),
+            y: Math.max( Math.min( Math.floor( (e.layerY     ) / gridsize), this.stores.BoardsStore.boards[0].y), 0),
           }
         )
       );
