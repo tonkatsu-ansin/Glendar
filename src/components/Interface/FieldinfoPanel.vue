@@ -9,6 +9,8 @@
       <div class="panel-element">
         <span class="element-icon" style="color:#00A6F0">♪</span>
         <span class="element-text">{{ getFileBasename(stores.BoardsStore.boards[0].music.key) }}</span>
+        <input type="range" class="volume" v-model="music.volume">
+        <audio style="display:hidden;" :src="stores.BoardsStore.boards[0].music.path" v-if="stores.BoardsStore.boards[0].music"></audio>
       </div>
 
       <div class="panel-element">
@@ -16,6 +18,8 @@
         <span class="element-text">{{ getFileBasename(stores.BoardsStore.boards[0].background.key) }}</span>
       </div>
       <a href="#" v-on:click.prevent="openModal">背景/音楽変更</a>
+
+      <music-player :filename="music.name" :playerdata="music.playerdata"></music-player>
     </ul>
   </div>
 </template>
@@ -65,6 +69,10 @@
   font-family: "Hiragino Sans";
 }
 
+.volume{
+  width: 50px;
+}
+
 form{
   background: #f5f5f5;
   width: calc(100% - 20px);
@@ -104,11 +112,52 @@ form button{
 </style>
 
 <script>
+const WSManager = require("../../utilities/WSManager")();
 module.exports = {
   data: ()=>{
     return {
-      stores: require("../../stores/Stores")
+      stores: require("../../stores/Stores"),
+      music: {
+        name: "",
+        volume: 10,
+        playerdata: {
+          "music-player": true,
+          "is-animate": false
+        }
+      }
     };
+  },
+  watch: {
+    "music.volume": function(){
+      console.log(+(this.music.volume) * 0.001);
+      this.$el.querySelector("audio").volume = +(this.music.volume) * 0.001;
+    }
+  },
+  created(){
+    const state = WSManager.database().ref("boards/state");
+
+    setTimeout(()=>{
+      this.$el.querySelector("audio").volume = 0.01;
+
+      state.on("child_changed", (data) => {
+        if(data.key == "music"){
+          this.stores.BoardsStore.boards[0].music = data.val();
+          console.log("かわった",  data.val());
+          this.$el.querySelector("audio").pause();
+          setTimeout(()=>{
+            this.$el.querySelector("audio").currentTime = 0;
+            this.$el.querySelector("audio").play();
+
+            this.music.playerdata["is-animate"] = true;
+            this.music.name = this.stores.BoardsStore.boards[0].music.key;
+            console.log(this.music.name);
+            setTimeout(()=>{
+              this.music.playerdata["is-animate"] = false;
+            }, 5000);
+          }, 160);
+        }
+      });
+    }, 32);
   },
   methods: {
     openModal(){
