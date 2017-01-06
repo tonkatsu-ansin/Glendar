@@ -1,5 +1,5 @@
 <template lang="html">
-  <div class="board-component" :style="getPosition" draggable="true" v-on:dragstart="dragstart" v-on:dragend="dragend" v-on:mouseover="mouseover">
+  <div class="board-component" :style="getPosition" draggable="true" v-on:dragstart="dragstart" v-on:dragend="dragend" v-on:mouseover="mouseover" v-on:contextmenu.prevent="emitContext">
     <img :src="component.image" alt="">
   </div>
 </template>
@@ -47,6 +47,10 @@ module.exports = {
     }
   },
   methods: {
+    emitContext(e){
+      this.$emit("rightclick", e);
+      return false;
+    },
     mouseover(){
       this.stores.ComponentsStore.activeId = this.component.id;
       this.stores.ComponentsStore.active = this.component;
