@@ -1,8 +1,9 @@
 <template lang="html">
   <div class="map">
-    <div class="map-body" v-on:contextmenu.prevent="makeContextMenu" :style="getMapStyle">
+    <div class="map-body" v-on:contextmenu.prevent="makeContextMenu" :style="getMapStyle" v-on:click="dismissContextMenu">
       <board-component :component="component" v-for="component in getComponents" v-on:rightclick="makeContextMenu"></board-component>
     </div>
+    <context-menu v-if="stores.ApplicationStore.isShowContextMenu" :pos="mouse"></context-menu>
   </div>
 </template>
 
@@ -12,6 +13,7 @@
   width: 100%;
   height: calc(100% - 180px);
   overflow: auto;
+  position: relative;
 }
 
 .map-body{
@@ -57,7 +59,11 @@ module.exports = {
   props: [ "sizes" ],
   data: () => {
     return {
-      stores: require("../stores/Stores")
+      stores: require("../stores/Stores"),
+      mouse: {
+        x: 0,
+        y: 0
+      }
     };
   },
   created(){
@@ -87,9 +93,17 @@ module.exports = {
       this.$emit("rightclick", e);
       return false;
     },
-    makeContextMenu(){
+    dismissContextMenu(){
+      this.stores.ApplicationStore.isShowContextMenu = false;
+    },
+    makeContextMenu(e){
       this.stores.ApplicationStore.isShowContextMenu = true;
       console.log("コンテキストメニューつけた");
+      console.log(e);
+      this.mouse = {
+        x: e.layerX,
+        y: e.layerY
+      };
     }
   }
 };
