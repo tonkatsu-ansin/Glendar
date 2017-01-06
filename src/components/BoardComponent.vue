@@ -1,7 +1,7 @@
 <template lang="html">
   <div class="board-component" :style="getPosition" draggable="true" v-on:dragstart="dragstart" v-on:dragend="dragend" v-on:mouseover="mouseover" v-on:contextmenu.prevent="emitContext">
     <img :src="component.image" alt="" v-if="component.type != 'range'">
-    <div class="range" v-else></div>
+    <div class="range" v-else><canvas width="400" height="400"></canvas></div>
   </div>
 </template>
 
@@ -15,8 +15,6 @@
   width: 39px;
   height: 39px;
 
-  background: #fff;
-
   cursor: pointer;
 
   transition: transform 0.3s ease-out;
@@ -26,11 +24,21 @@ img{
   width: 39px;
   height: 39px;
   pointer-events: none;
+
+  background: #fff;
 }
 
 .range{
-  width: 39px;
-  height: 39px;
+  width: 40px;
+  height: 40px;
+  position: relative;
+  background: rgba(0,0,0,0.01);
+}
+
+canvas{
+  position: absolute;
+  width: 200px;
+  height: 200px;
   pointer-events: none;
 }
 </style>
@@ -52,6 +60,27 @@ module.exports = {
         transform: `translate(${this.component.x*gridsize}px, ${this.component.y*gridsize}px)`
       };
     }
+  },
+  created(){
+    setTimeout(()=>{
+      if(this.component.type == "range"){
+        const context = this.$el.querySelector("canvas").getContext("2d");
+        const range = [
+          [0,0,1,0,0],
+          [0,1,1,1,0],
+          [1,1,1,1,1],
+          [0,1,1,1,0],
+          [0,0,1,0,0]
+        ];
+        context.fillStyle = "rgba(0,0,0,0.6)";
+        range.forEach((column, y)=>{
+          column.forEach((point, x)=>{
+            console.log(x, y, " = ", point);
+            if(point) context.fillRect(x*80+2, y*80+2, 76, 76);
+          });
+        });
+      }
+    }, 32);
   },
   methods: {
     emitContext(e){
