@@ -1,10 +1,6 @@
 <template lang="html">
   <div :class="{ 'initiative': true, 'dragging': this.stores.ApplicationStore.isDragging }">
     <charactor-about :charactor="charactor" v-for="charactor in getCharactors" v-on:click="clickCharactor" v-on:hover="hoverCharactor"></charactor-about>
-    <charactor-about :charactor="charactor" v-for="charactor in getCharactors" v-on:click="clickCharactor" v-on:hover="hoverCharactor"></charactor-about>
-    <charactor-about :charactor="charactor" v-for="charactor in getCharactors" v-on:click="clickCharactor" v-on:hover="hoverCharactor"></charactor-about>
-    <charactor-about :charactor="charactor" v-for="charactor in getCharactors" v-on:click="clickCharactor" v-on:hover="hoverCharactor"></charactor-about>
-    <charactor-about :charactor="charactor" v-for="charactor in getCharactors" v-on:click="clickCharactor" v-on:hover="hoverCharactor"></charactor-about>
   </div>
 </template>
 
