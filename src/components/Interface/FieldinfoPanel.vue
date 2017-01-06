@@ -112,7 +112,7 @@ module.exports = {
   },
   methods: {
     openModal(){
-      this.stores.ApplicationStore.isOpenFileDialog = true;
+      this.stores.ApplicationStore.dialogStateString = "file";
     },
     getFileBasename(filename){
       if(!filename) return filename;
