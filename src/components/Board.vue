@@ -1,7 +1,7 @@
 <template lang="html">
   <div class="map">
     <div class="map-body" :style="getMapStyle">
-      <board-component :component="component" v-for="component in getComponents"></board-component>
+      <board-component :component="component" v-for="component in getComponents" v-on:rightclick="makeContextMenu"></board-component>
     </div>
   </div>
 </template>
@@ -83,7 +83,10 @@ module.exports = {
     }
   },
   methods: {
-
+    makeContextMenu(){
+      this.stores.ApplicationStore.isShowContextMenu = true;
+      console.log("コンテキストメニューつけた");
+    }
   }
 };
 </script>
