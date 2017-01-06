@@ -163,7 +163,7 @@ module.exports = {
       this.active = target;
     },
     dismiss(){
-      this.stores.ApplicationStore.isOpenFileDialog = false;
+      this.stores.ApplicationStore.dialogStateString = "";
     },
     openUploadDialog(){
       this.$el.querySelector(".upload-input").click();
