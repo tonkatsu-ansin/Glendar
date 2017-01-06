@@ -109,6 +109,10 @@ module.exports = {
       this.stores.ApplicationStore.isFullDetail = false;
     },
     validator(param) {
+      if(typeof param  === "string"){
+        if(param.match(/[^0-9\+\*\-\/\(\)\s]|^[\s\+\-\*\/\)]/g)) return false;
+        return true;
+      }
       return isFinite(param);
     },
     updateStatus(key, name, param){
@@ -121,6 +125,7 @@ module.exports = {
       }
 
       if(!this.validator(data.status[name])) return;
+      data.status[name] = parseInt(data.status[name], 10);
       const sendData = this.stores.ComponentsStore.active;
       sendData.status = Object.assign(
         Object.create(null),
