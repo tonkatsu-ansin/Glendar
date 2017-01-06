@@ -2,15 +2,18 @@
   <div class="fieldinfo-panel">
     <ul class="element-list">
       <div class="panel-element">
-        <span class="element-icon" style="color:#E6BD4D">☀</span> 12:00
+        <span class="element-icon" style="color:#E6BD4D">☀</span>
+        <span class="element-text">12:00</span>
       </div>
 
       <div class="panel-element">
-        <span class="element-icon" style="color:#00A6F0">♪</span> {{ stores.BoardsStore.boards[0].music.key }}
+        <span class="element-icon" style="color:#00A6F0">♪</span>
+        <span class="element-text">{{ getFileBasename(stores.BoardsStore.boards[0].music.key) }}</span>
       </div>
 
       <div class="panel-element">
-        <span class="element-icon">🌊</span> {{ stores.BoardsStore.boards[0].background.key }}
+        <span class="element-icon">🌊</span>
+        <span class="element-text">{{ getFileBasename(stores.BoardsStore.boards[0].background.key) }}</span>
       </div>
       <a href="#" v-on:click.prevent="openModal">背景/音楽変更</a>
     </ul>
@@ -27,13 +30,29 @@
 
 .panel-element{
   margin-bottom: 10px;
-  font-size: 18px;
+  font-size: 14px;
   color: #fff;
   font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
 }
 
 .element-icon{
   font-size: 24px;
+  display: inline-block;
+  width: 30px;
+}
+
+.element-text{
+  width: calc(100% - 40px);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  display: inline-block;
+  font-size: 14px;
+  vertical-align: middle;
+  margin-left: 10px;
 }
 
 .fieldinfo-panel{
@@ -94,6 +113,14 @@ module.exports = {
   methods: {
     openModal(){
       this.stores.ApplicationStore.isOpenFileDialog = true;
+    },
+    getFileBasename(filename){
+      if(!filename) return filename;
+      const elements = filename.split(".");
+      if(elements.length >= 1){
+        elements.pop();
+      }
+      return elements.join("");
     }
   }
 };
