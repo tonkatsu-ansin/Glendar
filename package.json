@@ -40,6 +40,7 @@
     "firebase": "^3.6.4",
     "gulp": "^3.9.1",
     "gulp-s3-upload": "^1.6.1",
+    "pre-commit": "^1.2.2",
     "svg-url-loader": "^1.1.0",
     "vue": "^2.0.3",
     "vue-hot-reload-api": "^2.0.6",
@@ -49,5 +50,8 @@
     "webpack-dev-server": "^1.16.2",
     "webpack-dotenv-plugin": "^1.4.0",
     "whatwg-fetch": "^1.0.0"
-  }
+  },
+  "pre-commit": [
+    "test"
+  ]
 }
