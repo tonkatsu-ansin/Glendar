@@ -15,8 +15,10 @@
 
       <initiative></initiative>
       <boardselect-panel></boardselect-panel>
+      <component-add></component-add>
     </div>
 
+    <component-add></component-add>
     <file-dialog v-if="stores.ApplicationStore.dialogStateString === 'file'"></file-dialog>
   </div>
 </template>
