@@ -15,7 +15,6 @@
 
       <initiative></initiative>
       <boardselect-panel></boardselect-panel>
-      <componentadd-dialog></componentadd-dialog>
     </div>
 
     <componentadd-dialog></componentadd-dialog>

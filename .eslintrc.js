@@ -24,6 +24,9 @@ module.exports = {
             "always"
         ],
         "no-console": "off",
+        "no-constant-condition": [
+          "error", { "checkLoops": false }
+        ],
         "no-var": "error"
     },
     "plugins": [
