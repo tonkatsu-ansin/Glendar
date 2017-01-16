@@ -13,7 +13,7 @@
             <a href="#" v-on:click.prevent="test('2d6')">&times;</a>
           </li>
           <li class="pallet-element">
-            <input type="text" name="" value="" placeholder="追加する">
+            <input placeholder="追加する">
           </li>
         </ul>
       </div>
@@ -188,6 +188,7 @@ module.exports = {
       obj.scrollTop = obj.scrollHeight + 50;
     },
     send(){
+      this.dismissChatPallet();
       const TimeStamp = require("../../utilities/TimeStamp");
       Fetch("",
         "POST",
@@ -199,7 +200,6 @@ module.exports = {
         })
       );
       this.message.text =  "";
-      this.dismissChatPallet();
     },
     test(comment){
       this.message.text =  comment;
