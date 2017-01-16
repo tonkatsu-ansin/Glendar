@@ -5,7 +5,16 @@
     </ul>
     <form v-on:submit.prevent="send">
       <input v-model="message.user" class="user" placeholder="名無し" required>
-      <input v-model="message.text" class="text" placeholder="body here..." required>
+      <div class="text">
+        <input v-model="message.text" placeholder="body here..." v-on:focus="openChatPallet" v-on:click="openChatPallet" v-on:keyup.esc="dismissChatPallet" required>
+        <ul class="chat-pallet" v-if="isOpenChatPallet">
+          <li class="pallet-element pallet-template" v-on:click="test('2d6+'+number)" v-for="number in 5">
+            {{"2d6+"+number}}
+            <a href="#" v-on:click.prevent="test('2d6')">&times;</a>
+          </li>
+          <li class="pallet-element"></li>
+        </ul>
+      </div>
       <input v-model="message.color" class="color" required>
       <input v-model="message.color" class="picker" type="color" required>
       <button type="submit" name="button">送信</button>
@@ -63,13 +72,6 @@ form .user{
   margin-left: 0;
 }
 
-form .text{
-  flex: 1;
-  outline: none;
-
-  font-size: 12px;
-}
-
 form .color{
   width: 80px;
   outline: none;
@@ -96,6 +98,47 @@ form button{
   font-size: 16px;
   margin-left: 10px;
 }
+
+form .text{
+  flex: 1;
+  outline: none;
+
+  font-size: 12px;
+  margin: 0 5px;
+  position: relative;
+}
+
+.text input{
+  width: calc(100% - 5px);
+  margin: 0;
+}
+
+.chat-pallet{
+  position: absolute;
+  bottom: 33px;
+  left: 0;
+  width: calc(100% + 1px);
+  background: #fff;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  box-shadow: 0 0 3px rgba(0,0,0,0.093);
+}
+
+.pallet-element{
+  padding: 10px 5px;
+  border-bottom: solid 1px #e5e5e5;
+  cursor: pointer;
+}
+
+.pallet-element:hover{
+  color: #fff;
+  background: #50A8FF;
+}
+
+.pallet-element:empty::before{
+  content: "test";
+}
 </style>
 
 <script>
@@ -115,7 +158,8 @@ module.exports = {
         text: "",
         color: "#000"
       },
-      stores: require("../../stores/Stores")
+      stores: require("../../stores/Stores"),
+      isOpenChatPallet: false
     };
   },
   created(){
@@ -153,6 +197,18 @@ module.exports = {
         })
       );
       this.message.text =  "";
+    },
+    test(comment){
+      this.message.text =  comment;
+      this.dismissChatPallet();
+    },
+    openChatPallet(){
+      this.isOpenChatPallet = true;
+    },
+    dismissChatPallet(){
+      setTimeout(()=>{
+        this.isOpenChatPallet = false;
+      }, 50);
     }
   }
 };
