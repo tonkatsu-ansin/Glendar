@@ -199,6 +199,7 @@ module.exports = {
         })
       );
       this.message.text =  "";
+      this.dismissChatPallet();
     },
     test(comment){
       this.message.text =  comment;
