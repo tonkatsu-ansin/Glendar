@@ -12,7 +12,9 @@
             {{"2d6+"+number}}
             <a href="#" v-on:click.prevent="test('2d6')">&times;</a>
           </li>
-          <li class="pallet-element"></li>
+          <li class="pallet-element">
+            <input type="text" name="" value="" placeholder="追加する">
+          </li>
         </ul>
       </div>
       <input v-model="message.color" class="color" required>
