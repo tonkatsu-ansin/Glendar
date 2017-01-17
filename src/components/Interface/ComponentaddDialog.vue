@@ -2,9 +2,11 @@
   <div class="">
     <base-dialog>
       <form>
+        <label>name</label>
+        <input v-model="form.name"></input>
         <input v-model="form.id" type="hidden"></input>
-        <input type=""v-model="form.image"></input>
-        <input v-model="form.memo"></input>
+        <label>memo</label>
+        <textarea v-model="form.memo"></textarea>
         <form class="upload-form">
           <input type="file" name="file" class="upload-input" v-on:change="executeUpload">
         </form>
@@ -28,8 +30,8 @@
           <label>y</label>
           <input v-model="form.y"></input>
         </div>
-        <button type="submit" class="dialogButton" value="OK">OK</button>
-        <button type="submit" class="dialogButton" value="Cancel">Cancel</button>
+        <button type="submit" class="dialogButton" value="OK" v-on:click="onClickOKButton">OK</button>
+        <button type="submit" class="dialogButton" value="Cancel" v-on:click="dismiss">Cancel</button>
       </form>
     </base-dialog>
   </div>
@@ -43,11 +45,13 @@ module.exports = {
   },
   data: () => {
     return {
+      stores: require("../../stores/Stores"),
       currentFile: "", //コンポーネントのアイコンにする画像のファイル名が入ります
       form: {
+        name: "",
         id: 0,
         image: 0,
-        memo: 0,
+        memo: "",
         hp: 0,
         max_hp: 0,
         mp: 0,
@@ -57,18 +61,18 @@ module.exports = {
         x: 0,
         y: 0
       }
-    }
+    };
   },
   methods: {
-    * changeButtonState(){
-      const btns = document.querySelectorAll(".dialogButton");
+    *changeButtonState(){
+      let btns = document.querySelectorAll(".dialogButton");
       console.log(btns);
-      while(true){
-        for(const btn of btns){
+      for(;;){
+        for(let btn of btns){
           btn.disabled = true;
         }
         yield;
-        for(const btn of btns){
+        for(let btn of btns){
           btn.disabled = false;
         }
         yield;
@@ -96,11 +100,36 @@ module.exports = {
       });
     },
     createComponent(){
-
+      return WSManager.database().ref("boards/components").push({
+        image: `http://glendar.s3-website-ap-northeast-1.amazonaws.com/${this.currentFile}`,
+        is_locking: false,
+        name: this.form.name,
+        memo: this.form.memo,
+        type: "charactor",
+        status:{
+          hp: parseInt(this.form.hp, 10),
+          max_hp: parseInt(this.form.max_hp, 10),
+          mp: parseInt(this.form.max_mp, 10),
+          max_mp: parseInt(this.form.max_mp, 10),
+          move: parseInt(this.form.move, 10),
+          protection: parseInt(this.form.protection, 10),
+        },
+        x: parseInt(this.form.x, 10),
+        y: parseInt(this.form.y, 10)
+      });
     },
     dismiss(){
-
+      this.stores.ApplicationStore.dialogStateString = "";
+    },
+    onClickOKButton(){
+      this.createComponent()
+      .then(() => {
+        this.dismiss();
+      })
+      .catch((err) => {
+        console.log(err);
+      });
     }
   }
-}
+};
 </script>
