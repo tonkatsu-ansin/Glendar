@@ -64,9 +64,36 @@
           <div class="column">
             <h3 class="column-title">Image</h3>
 
-            <p>
-              Work in Progress...
-            </p>
+              <ul class="file-list">
+                <!-- <li class="list-element">
+                  <div class="list-filetype">
+                    <span>+</span>
+                  </div>
+
+                  <div class="list-info">
+                    <span class="list-filename">アップロード</span>
+                  </div>
+                </li> -->
+                <li class="list-element" v-if="assets.length == 0">
+                  <div class="list-filetype">⌛</div>
+
+                  <div class="list-info">
+                    <span class="list-filename">Loading...</span>
+                  </div>
+                </li>
+
+                <li v-for="(asset, index) in assets" :class="{'list-element': true, 'active': index == active}" v-on:click="selectFile(asset.filename)">
+
+                  <div v-if="getFileType(asset.filename) == 'image'" class="list-filetype" :style="{'background-image': 'url(http://glendar.s3-website-ap-northeast-1.amazonaws.com/'+ asset.filename + ')'  }"></div>
+                  <div v-else-if="getFileType(asset.filename) == 'music'" class="list-filetype">♪</div>
+                  <div v-else class="list-filetype">?</div>
+
+                  <div class="list-info">
+                    <span class="list-filename">{{asset.key}}</span>
+                  </div>
+                </li>
+              </ul>
+
           </div>
         </div>
 
@@ -211,6 +238,68 @@ button{
   background: #aaa;
   color: #fff;
 }
+
+.file-list{
+  padding: 0;
+  margin: 0;
+  list-style: none;
+  color: #333;
+  width: 100%;
+  height: 248px;
+  font-family: Lato;
+
+  overflow: auto;
+
+  border: solid 1px #e5e5e5;
+}
+
+.list-element{
+  display: flex;
+  padding: 10px;
+  align-items: center;
+  border-bottom: solid 1px #e5e5e5;
+}
+
+.list-element:hover,
+.list-element.active{
+  color: #fff;
+  background: #55aaff;
+  cursor: pointer;
+}
+
+.list-filetype{
+  width: 30px;
+  height: 30px;
+  margin-right: 10px;
+  font-size: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+.list-info{
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+  flex: 1;
+  width: calc(100% - 50px);
+}
+
+.list-filename{
+  font-size: 12px;
+  font-weight: bold;
+  width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap
+}
+
+.list-filepath{
+  font-size: 12px;
+}
 </style>
 
 <script>
@@ -236,8 +325,15 @@ module.exports = {
         protection: 0,
         x: 0,
         y: 0
-      }
+      },
+      assets: []
     };
+  },
+  created(){
+    const assetsListener = WSManager.database().ref("boards/assets");
+    assetsListener.on("child_added", (data) => {
+      if(this.getFileType(data.val().key) == "image") this.assets.push(data.val());
+    });
   },
   computed: {
     getIconStyle(){
@@ -251,6 +347,23 @@ module.exports = {
     }
   },
   methods: {
+    getFileType(filename){
+      const f = filename.split(".");
+
+      switch ( (f[f.length-1].toLowerCase()) ) {
+      case "jpg":
+      case "jpeg":
+      case "png":
+        return "image";
+      case "wav":
+      case "mp3":
+        return "music";
+      }
+      return;
+    },
+    selectFile(filename){
+      this.form.image = `http://glendar.s3-website-ap-northeast-1.amazonaws.com/${filename}`;
+    },
     clickFileUploadButton(){
       this.$el.querySelector("input[type='file']").click();
     },
