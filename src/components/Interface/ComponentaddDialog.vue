@@ -44,7 +44,7 @@
               <p>
                 <label>Move</label>
                 <div class="inputs">
-                  <input v-model="form.mp" class="input-mp">
+                  <input v-model="form.move" class="input-mp">
                 </div>
               </p>
               <p>
