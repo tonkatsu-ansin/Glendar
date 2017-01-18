@@ -52,7 +52,7 @@ module.exports = {
       return false;
     },
     mouseover(){
-      this.stores.ComponentsStore.activeId = this.component.id;
+      this.stores.ComponentsStore.activeId = this.component.key;
       this.stores.ComponentsStore.active = this.component;
     },
     dragstart(){
