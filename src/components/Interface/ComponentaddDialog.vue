@@ -24,14 +24,14 @@
           <label>protection</label>
           <input v-model="form.protection"></input>
         </div>
-        <div class="form.position">
+        <div class="position">
           <label>x</label>
           <input v-model="form.x"></input>
           <label>y</label>
           <input v-model="form.y"></input>
         </div>
         <button type="submit" class="dialogButton" value="OK" v-on:click="onClickOKButton">OK</button>
-        <button type="submit" class="dialogButton" value="Cancel" v-on:click="dismiss">Cancel</button>
+        <button type="button" class="dialogButton" value="Cancel" v-on:click="dismiss">Cancel</button>
       </form>
     </base-dialog>
   </div>
