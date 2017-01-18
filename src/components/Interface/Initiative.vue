@@ -65,12 +65,12 @@ module.exports = {
   methods: {
     hoverCharactor(charactor){
       console.log(charactor);
-      // this.stores.ComponentsStore.activeId = charactor.id;
+      // this.stores.ComponentsStore.activeId = charactor.key;
       // this.stores.ComponentsStore.active = charactor;
     },
     clickCharactor(charactor){
       console.log(charactor);
-      this.stores.ComponentsStore.activeId = charactor.id;
+      this.stores.ComponentsStore.activeId = charactor.key;
       this.stores.ComponentsStore.active = charactor;
     }
   }

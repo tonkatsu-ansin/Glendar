@@ -1,7 +1,10 @@
 <template lang="html">
   <div class="">
+    <form class="upload-form" style="display:none;">
+      <input type="file" name="file" class="upload-input" v-on:change="executeUpload">
+    </form>
     <base-dialog width="650" height="500">
-      <form>
+      <form v-on:submit.prevent="createComponent">
         <header>
           <div class="header-icon" :style="getIconStyle" v-on:click="clickFileUploadButton">
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" v-if="!form.image">
@@ -60,16 +63,17 @@
 
           <div class="column">
             <h3 class="column-title">Image</h3>
+
+            <p>
+              Work in Progress...
+            </p>
           </div>
         </div>
 
         <input v-model="form.id" type="hidden">
-        <form class="upload-form" style="display:none;">
-          <input type="file" name="file" class="upload-input" v-on:change="executeUpload">
-        </form>
 
         <div class="dialog-buttons">
-          <button type="submit" name="button" class="submit-button" v-on:click="onClickOKButton">決定</button>
+          <button type="submit" name="button" class="submit-button">決定</button>
           <button type="button" name="button" class="cancel-button" v-on:click="dismiss">キャンセル</button>
         </div>
       </form>
@@ -280,8 +284,11 @@ module.exports = {
         console.log(err);
       });
     },
+    dismiss(){
+      this.stores.ApplicationStore.dialogStateString = "";
+    },
     createComponent(){
-      return WSManager.database().ref("boards/components").push({
+      WSManager.database().ref("boards/components/components").push({
         image: `http://glendar.s3-website-ap-northeast-1.amazonaws.com/${this.currentFile}`,
         is_locking: false,
         name: this.form.name,
@@ -297,13 +304,7 @@ module.exports = {
         },
         x: parseInt(this.form.x, 10),
         y: parseInt(this.form.y, 10)
-      });
-    },
-    dismiss(){
-      this.stores.ApplicationStore.dialogStateString = "";
-    },
-    onClickOKButton(){
-      this.createComponent()
+      })
       .then(() => {
         this.dismiss();
       })
