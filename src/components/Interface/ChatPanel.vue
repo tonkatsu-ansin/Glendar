@@ -8,12 +8,12 @@
       <div class="text">
         <input v-model="message.text" placeholder="body here..." v-on:focus="openChatPallet" v-on:click="openChatPallet" v-on:keyup.esc="dismissChatPallet" required>
         <ul class="chat-pallet" v-if="isOpenChatPallet">
-          <li class="pallet-element pallet-template" v-on:click="test('2d6+'+number)" v-for="number in 5">
-            {{"2d6+"+number}}
-            <a href="#" v-on:click.prevent="test('2d6')">&times;</a>
+          <li class="pallet-element pallet-template" v-on:click="test(cp)" v-for="cp in cptemplates">
+            {{cp}}
+            <a href="#" v-on:click.prevent="test(cp)">&times;</a>
           </li>
           <li class="pallet-element">
-            <input placeholder="追加する">
+            <input placeholder="追加する" class="chatpallet-add" v-on:keydown.enter="addCp" v-model="cpText">
           </li>
         </ul>
       </div>
@@ -133,13 +133,17 @@ form .text{
   cursor: pointer;
 }
 
-.pallet-element:hover{
+.pallet-template:hover{
   color: #fff;
   background: #50A8FF;
 }
 
 .pallet-element:empty::before{
   content: "test";
+}
+
+.chatpallet-add{
+  border: none;
 }
 </style>
 
@@ -160,6 +164,8 @@ module.exports = {
         text: "",
         color: "#000"
       },
+      cpText: "",
+      cptemplates: JSON.parse(localStorage.cptemplates || "[]"),
       stores: require("../../stores/Stores"),
       isOpenChatPallet: false
     };
@@ -212,6 +218,15 @@ module.exports = {
       setTimeout(()=>{
         this.isOpenChatPallet = false;
       }, 50);
+    },
+    addCp(e){
+      e.preventDefault();
+      // alert(1);
+      this.cptemplates.push(this.cpText);
+      localStorage.cptemplates = JSON.stringify(this.cptemplates);
+
+      this.cpText = "";
+      return false;
     }
   }
 };
