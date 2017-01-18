@@ -65,7 +65,7 @@ module.exports = {
   },
   methods: {
     *changeButtonState(){
-      let btns = document.querySelectorAll(".dialogButton");
+      let btns = this.$el.querySelectorAll(".dialogButton");
       console.log(btns);
       for(;;){
         for(let btn of btns){
@@ -85,7 +85,7 @@ module.exports = {
         `${process.env["DICEAPI_ROOT"]}/upload`,
         {
           method: "POST",
-          body: new FormData(document.querySelector(".upload-form"))
+          body: new FormData(this.$el.querySelectorAll(".upload-form"))
         }
       )
       .then((data)=>{
