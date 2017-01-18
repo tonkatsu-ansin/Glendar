@@ -402,7 +402,7 @@ module.exports = {
     },
     createComponent(){
       WSManager.database().ref("boards/components/components").push({
-        image: `http://glendar.s3-website-ap-northeast-1.amazonaws.com/${this.currentFile}`,
+        image: this.form.image,
         is_locking: false,
         name: this.form.name,
         memo: this.form.memo,
