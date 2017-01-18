@@ -64,18 +64,11 @@ module.exports = {
     };
   },
   methods: {
-    *changeButtonState(){
+    changeButtonState(){
       let btns = this.$el.querySelectorAll(".dialogButton");
       console.log(btns);
-      for(;;){
-        for(let btn of btns){
-          btn.disabled = true;
-        }
-        yield;
-        for(let btn of btns){
-          btn.disabled = false;
-        }
-        yield;
+      for(const btn of btns){
+        btn.disabled = !btn.disabled;
       }
     },
     executeUpload(){
