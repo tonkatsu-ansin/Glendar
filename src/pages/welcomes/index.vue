@@ -17,6 +17,7 @@
       <boardselect-panel></boardselect-panel>
     </div>
 
+    <componentadd-dialog v-if="stores.ApplicationStore.dialogStateString === 'componentadd'"></componentadd-dialog>
     <file-dialog v-if="stores.ApplicationStore.dialogStateString === 'file'"></file-dialog>
   </div>
 </template>
@@ -83,55 +84,40 @@ module.exports = {
       });
 
       const components = WSManager.database().ref("boards/components/components");
-      components.once("value")
-      .then((data)=>{
-        console.log(data.val());
-        data.val().map((component, key)=>{
+
+      components.on("child_added", (data) => {
+        if(!this.stores.ComponentsStore.components.find((component)=>{
+          return data.key == component.key;
+        })){
+          console.log("Add");
           this.stores.ComponentsStore.components.push(
             Object.assign(
               Object.create(null),
-              component,
+              data.val(),
               {
-                key
+                key: data.key
               }
             )
           );
-        });
+        }
+      });
 
-        components.on("child_added", (data) => {
-          if(!this.stores.ComponentsStore.components.find((component)=>{
-            return data.val().id == component.id;
-          })){
-            console.log("Add");
-            this.stores.ComponentsStore.components.push(
-              Object.assign(
-                Object.create(null),
-                data.val(),
-                {
-                  key: data.key
-                }
-              )
-            );
+      components.on("child_changed", (data) => {
+        console.log("get", data.val());
+        const target = data.val();
+        this.stores.ComponentsStore.components = this.stores.ComponentsStore.components.map((component)=>{
+          if(component.key == target.key){
+            component = target;
+            console.log("Search done");
           }
+          return component;
         });
 
-        components.on("child_changed", (data) => {
-          console.log("get", data.val());
-          const target = data.val();
-          this.stores.ComponentsStore.components = this.stores.ComponentsStore.components.map((component)=>{
-            if(component.id == target.id){
-              component = target;
-              console.log("Search done");
-            }
-            return component;
-          });
+        if(this.stores.ComponentsStore.active.key == target.key){
+          this.stores.ComponentsStore.active = target;
+        }
 
-          if(this.stores.ComponentsStore.active.id == target.id){
-            this.stores.ComponentsStore.active = target;
-          }
-
-          console.log(this.stores.ComponentsStore.components);
-        });
+        console.log(this.stores.ComponentsStore.components);
       });
     }
   }

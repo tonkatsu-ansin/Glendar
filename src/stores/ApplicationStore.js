@@ -1,7 +1,7 @@
 module.exports = {
   isDragging: false,
   isFullDetail: true,
-  dialogStateString: "",
+  dialogStateString: "componentadd",
   isOpenFileDialog: false,
   isShowContextMenu: false
 };

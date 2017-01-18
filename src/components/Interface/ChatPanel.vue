@@ -177,7 +177,7 @@ module.exports = {
   computed: {
     getActiveComponent(){
       return this.stores.ComponentsStore.components.find((component)=>{
-        return this.stores.ComponentsStore.activeId == component.id;
+        return this.stores.ComponentsStore.activeId == component.key;
       });
     }
   },

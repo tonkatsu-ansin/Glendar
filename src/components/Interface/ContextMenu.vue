@@ -1,7 +1,7 @@
 <template>
   <div class="context-menu" :style="getContextMenuStyle">
     <ul>
-      <li>コンポーネントの追加</li>
+      <li v-on:click='openDialog("componentadd")'>コンポーネントの追加</li>
       <li>範囲を作成</li>
       <li v-on:click="dismiss">消す</li>
     </ul>
@@ -55,6 +55,10 @@ module.exports = {
     }
   },
   methods: {
+    openDialog(name){
+      this.dismiss();
+      this.stores.ApplicationStore.dialogStateString = name;
+    },
     dismiss(){
       this.stores.ApplicationStore.isShowContextMenu = false;
     }
