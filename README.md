@@ -1,5 +1,7 @@
 # Glendar
 
+[![Build Status](https://travis-ci.org/tonkatsu-ansin/Glendar.svg?branch=master)](https://travis-ci.org/tonkatsu-ansin/Glendar)
+
 Glendar is FUCKIN AWESOME BEAUTIFUL SwordWorld 2.0 Online Session Tool.
 
 ## Requirements
