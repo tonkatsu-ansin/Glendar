@@ -1,5 +1,7 @@
+.tern-port
 node_modules/
 public_html/bundle.js
 .env
 test.mp3
 npm-debug.log
+~/
