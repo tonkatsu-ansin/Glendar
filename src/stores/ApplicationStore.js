@@ -3,5 +3,6 @@ module.exports = {
   isFullDetail: true,
   dialogState: "",
   isOpenFileDialog: false,
-  isShowContextMenu: false
+  isShowContextMenu: false,
+  rightClickTarget: false
 };

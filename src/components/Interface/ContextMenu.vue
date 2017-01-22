@@ -2,7 +2,8 @@
   <div class="context-menu" :style="getContextMenuStyle">
     <ul>
       <li v-on:click='openDialog("componentadd")'>コンポーネントの追加</li>
-      <li>範囲を作成</li>
+      <!-- <li>範囲を作成</li> -->
+      <li v-on:click="deleteComponent">{{stores.ApplicationStore.rightClickTarget.name}}を削除</li>
       <li v-on:click="dismiss">消す</li>
     </ul>
   </div>
@@ -39,6 +40,7 @@ li:hover{
 </style>
 
 <script>
+const WSManager = require("../../utilities/WSManager")();
 module.exports = {
   props: ["pos"],
   data: ()=>{
@@ -58,6 +60,17 @@ module.exports = {
     openDialog(name){
       this.dismiss();
       this.stores.ApplicationStore.dialogState = name;
+    },
+    deleteComponent(){
+      WSManager.database().ref(`boards/components/components/${this.stores.ApplicationStore.rightClickTarget.key}`).remove()
+      .then((data) => {
+        console.log("Success", data);
+        this.dismiss();
+      })
+      .catch((err) => {
+        console.log("Fail", err);
+        this.dismiss();
+      });
     },
     dismiss(){
       this.stores.ApplicationStore.isShowContextMenu = false;
