@@ -141,7 +141,9 @@ module.exports = {
   created(){
     const assetsListener = WSManager.database().ref("boards/assets");
     assetsListener.on("child_added", (data) => {
-      this.assets.push(data.val());
+      const type = this.getFileType(data.val().key);
+
+      if(type == "image" || type == "music") this.assets.push(data.val());
     });
   },
   methods: {
@@ -163,7 +165,7 @@ module.exports = {
       this.active = target;
     },
     dismiss(){
-      this.stores.ApplicationStore.dialogStateString = "";
+      this.stores.ApplicationStore.dialogState = "";
     },
     openUploadDialog(){
       this.$el.querySelector(".upload-input").click();

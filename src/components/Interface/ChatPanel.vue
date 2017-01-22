@@ -8,11 +8,11 @@
       <div class="text">
         <input v-model="message.text" placeholder="body here..." v-on:focus="openChatPallet" v-on:click="openChatPallet" v-on:keyup.esc="dismissChatPallet" required>
         <ul class="chat-pallet" v-if="isOpenChatPallet">
-          <li class="pallet-element pallet-template" v-on:click="test(cp)" v-for="cp in cptemplates">
+          <li class="pallet-element pallet-template" v-on:click="test(cp)" v-for="(cp, id) in cptemplates">
             {{cp}}
-            <a href="#" v-on:click.prevent="test(cp)">&times;</a>
+            <a href="#" v-on:click.prevent="deletePalleteElement($event, id)">&times;</a>
           </li>
-          <li class="pallet-element">
+          <li class="pallet-element add-element">
             <input placeholder="追加する" class="chatpallet-add" v-on:keydown.enter="addCp" v-model="cpText">
           </li>
         </ul>
@@ -125,6 +125,9 @@ form .text{
   padding: 0;
   list-style: none;
   box-shadow: 0 0 3px rgba(0,0,0,0.093);
+
+  max-height: 300px;
+  overflow: auto;
 }
 
 .pallet-element{
@@ -140,6 +143,10 @@ form .text{
 
 .pallet-element:empty::before{
   content: "test";
+}
+
+.pallet-element.add-element{
+  padding: 5px;
 }
 
 .chatpallet-add{
@@ -162,7 +169,7 @@ module.exports = {
       message: {
         user: "",
         text: "",
-        color: "#000"
+        color: "#000000"
       },
       cpText: "",
       cptemplates: JSON.parse(localStorage.cptemplates || "[]"),
@@ -226,6 +233,12 @@ module.exports = {
       localStorage.cptemplates = JSON.stringify(this.cptemplates);
 
       this.cpText = "";
+      return false;
+    },
+    deletePalleteElement(e, index){
+      e.preventDefault();
+
+      this.cptemplates.splice(index);
       return false;
     }
   }

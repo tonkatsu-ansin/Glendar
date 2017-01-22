@@ -57,7 +57,7 @@ module.exports = {
   methods: {
     openDialog(name){
       this.dismiss();
-      this.stores.ApplicationStore.dialogStateString = name;
+      this.stores.ApplicationStore.dialogState = name;
     },
     dismiss(){
       this.stores.ApplicationStore.isShowContextMenu = false;

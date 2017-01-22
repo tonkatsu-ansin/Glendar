@@ -168,7 +168,7 @@ module.exports = {
   },
   methods: {
     openModal(){
-      this.stores.ApplicationStore.dialogStateString = "file";
+      this.stores.ApplicationStore.dialogState = "file";
     },
     getFileBasename(filename){
       if(!filename) return filename;

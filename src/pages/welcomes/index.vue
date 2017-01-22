@@ -17,8 +17,8 @@
       <boardselect-panel></boardselect-panel>
     </div>
 
-    <componentadd-dialog v-if="stores.ApplicationStore.dialogStateString === 'componentadd'"></componentadd-dialog>
-    <file-dialog v-if="stores.ApplicationStore.dialogStateString === 'file'"></file-dialog>
+    <componentadd-dialog v-if="stores.ApplicationStore.dialogState === 'componentadd'"></componentadd-dialog>
+    <file-dialog v-if="stores.ApplicationStore.dialogState === 'file'"></file-dialog>
   </div>
 </template>
 

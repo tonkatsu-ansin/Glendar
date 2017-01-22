@@ -398,7 +398,7 @@ module.exports = {
       });
     },
     dismiss(){
-      this.stores.ApplicationStore.dialogStateString = "";
+      this.stores.ApplicationStore.dialogState = "";
     },
     createComponent(){
       WSManager.database().ref("boards/components/components").push({

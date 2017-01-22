@@ -74,7 +74,7 @@ module.exports = {
   },
   methods: {
     dismiss(){
-      this.stores.ApplicationStore.dialogStateString = "";
+      this.stores.ApplicationStore.dialogState = "";
     },
   }
 };
