@@ -3,7 +3,7 @@
     <ul>
       <li v-on:click='openDialog("componentadd")'>コンポーネントの追加</li>
       <!-- <li>範囲を作成</li> -->
-      <li v-on:click="deleteComponent">{{stores.ApplicationStore.rightClickTarget.name}}を削除</li>
+      <li v-on:click="deleteComponent" v-if="stores.ApplicationStore.rightClickTarget">{{stores.ApplicationStore.rightClickTarget.name}}を削除</li>
       <li v-on:click="dismiss">消す</li>
     </ul>
   </div>
@@ -73,6 +73,7 @@ module.exports = {
       });
     },
     dismiss(){
+      this.stores.ApplicationStore.rightClickTarget = false;
       this.stores.ApplicationStore.isShowContextMenu = false;
     }
   }
