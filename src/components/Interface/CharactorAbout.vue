@@ -41,6 +41,7 @@
   flex-direction: column;
   align-items: flex-start;
   justify-content: flex-start;
+  flex: 1;
 }
 
 .status-name{
