@@ -49,6 +49,7 @@ module.exports = {
   methods: {
     emitContext(e){
       this.$emit("rightclick", e);
+      this.stores.ApplicationStore.rightClickTarget = this.component;
       return false;
     },
     mouseover(){

@@ -119,6 +119,12 @@ module.exports = {
 
         console.log(this.stores.ComponentsStore.components);
       });
+
+      components.on("child_removed", (data) => {
+        this.stores.ComponentsStore.components = this.stores.ComponentsStore.components.filter((component)=>{
+          return component.key != data.key;
+        });
+      });
     }
   }
 };

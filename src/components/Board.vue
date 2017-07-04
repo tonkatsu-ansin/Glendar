@@ -94,6 +94,7 @@ module.exports = {
       return false;
     },
     dismissContextMenu(){
+      this.stores.ApplicationStore.rightClickTarget = false;
       this.stores.ApplicationStore.isShowContextMenu = false;
     },
     makeContextMenu(e){
