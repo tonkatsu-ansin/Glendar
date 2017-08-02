@@ -1,0 +1,56 @@
+{
+  "name": "glendar",
+  "version": "0.1.0",
+  "description": "Vue.js develop template.",
+  "main": "src/index.js",
+  "scripts": {
+    "heroku": "cp .env.example .env;npm run build;node server.js",
+    "start": "npm run serve",
+    "lint": "eslint ./src/ --ext=js,vue",
+    "lint:fix": "eslint ./src --fix --ext=js,vue",
+    "lint:safe": "eslint ./src --ext=js,vue ;exit 0",
+    "build": "webpack --progress --hide-modules --config webpack.config.js",
+    "serve": "webpack-dev-server --inline --hot --config webpack.config.js -d --open --history-api-fallback --host 0.0.0.0",
+    "deploy": "npm run build;gulp deploy",
+    "test": "npm run lint",
+    "test:safe": "npm run lint; exit 0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tonkatsu-ansin/glendar.git"
+  },
+  "author": "Potato4d",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/tonkatsu-ansin/glendar/issues"
+  },
+  "homepage": "https://github.com/tonkatsu-ansin/glendar#readme",
+  "devDependencies": {
+    "babel": "^6.5.2",
+    "babel-core": "^6.17.0",
+    "babel-loader": "^6.2.5",
+    "babel-plugin-transform-runtime": "^6.15.0",
+    "babel-runtime": "^6.11.6",
+    "calcformula": "0.0.1",
+    "css-loader": "^0.25.0",
+    "dotenv": "^2.0.0",
+    "eslint": "^3.8.1",
+    "eslint-plugin-vue": "^0.1.1",
+    "firebase": "^3.6.4",
+    "gulp": "^3.9.1",
+    "gulp-s3-upload": "^1.6.1",
+    "pre-commit": "^1.2.2",
+    "svg-url-loader": "^1.1.0",
+    "vue": "^2.0.3",
+    "vue-hot-reload-api": "^2.0.6",
+    "vue-loader": "^9.7.0",
+    "vue-router": "^2.0.1",
+    "webpack": "^1.13.2",
+    "webpack-dev-server": "^1.16.2",
+    "webpack-dotenv-plugin": "^1.4.0",
+    "whatwg-fetch": "^1.0.0"
+  },
+  "pre-commit": [
+    "test"
+  ]
+}
