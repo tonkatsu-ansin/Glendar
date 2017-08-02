@@ -48,7 +48,8 @@
     "webpack": "^1.13.2",
     "webpack-dev-server": "^1.16.2",
     "webpack-dotenv-plugin": "^1.4.0",
-    "whatwg-fetch": "^1.0.0"
+    "whatwg-fetch": "^1.0.0",
+    "babel-preset-env": "^1.6.0"
   },
   "pre-commit": [
     "test"
